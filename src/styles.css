@@ -1,0 +1,102 @@
+/* Add custom fonts */
+@font-face {
+  font-family: "Ubuntu";
+  src: url("../src/assets/fonts/Ubuntu-Regular.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Segoe";
+  src: url("../src/assets/fonts/Segoe.woff") format("opentype");
+}
+
+body{
+    font-family: 'Ubuntu';
+    background-color: whitesmoke;
+}
+
+.logo{
+  height: 30px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .pageview{
+      padding: 30px;
+      overflow: auto;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .pageview{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
+.submit{
+  background-color: white;
+  border-radius: 0;
+  border: 1px solid #ced4da;
+  float: right;
+}
+
+.textarea{
+    resize: none;
+    height: 150px;
+    border-radius: 0;
+}
+
+.form-control{
+  border-radius: 0; 
+}
+
+.input-form{
+  padding: 30px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.custom-select{
+  border-radius: 0;
+}
+
+.btn-select {
+  overflow: hidden;
+  color: black;
+  align-content: center;
+  margin: auto;
+  width: 100%;
+  border: 1px solid #ced4da;
+  background-color: white;
+  border-radius: 0;
+}
+
+
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+    z-index: -1;}
+
+.upload-icon{
+  width: 20px;
+}
+
+.required{
+  color: red;
+}
+
+.logout{
+  cursor: pointer;
+}
+
+.swal2-popup {
+  margin-top: 50px;
+  font-size: .8rem !important;
+  background-color: white;
+  border-radius: 0;
+}
+
+

@@ -1,0 +1,62 @@
+
+
+.borderless th, .borderless td{
+    border : none;
+    vertical-align: middle;
+}
+
+th{
+    background-color: #737070;
+    font-weight: 400;
+    font-size: 14px;
+    color: white;
+}
+
+
+.pList_title{
+    float: left;
+}
+
+@media only screen and (min-width: 768px) {
+    .searchbox{
+        text-align: right;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .searchbox{
+        text-align: left;
+        margin-bottom: 10px;
+        position: relative;
+        display: flex;
+    }
+}
+
+.searchTerm {
+  border: 1px solid gainsboro;
+  border-right: none;
+  padding: 5px;
+  height: 30px;
+  border-radius: 0px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchButton , .addButton{
+  width: 40px;
+  height: 30px;
+  border: 1px solid gainsboro;
+  background: gainsboro;
+  text-align: center;
+  color:black;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.addButton{
+  margin-left: 5px;
+}
