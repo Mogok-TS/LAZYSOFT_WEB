@@ -13,7 +13,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'product-list', pathMatch: 'full' },
     { path: 'product-list', component: ProductListComponent },
     { path: 'product-addition', component: ProductAdditionComponent },
-    { path: 'product-edition', component: ProductEditionComponent },
+    { path: 'product-edition/:id', component: ProductEditionComponent },
   ] },
 ];
 

@@ -3,6 +3,7 @@
 .borderless th, .borderless td{
     border : none;
     vertical-align: middle;
+    border-bottom: 1px solid #737070;
 }
 
 th{
@@ -45,7 +46,7 @@ th{
   color: #9DBFAF;
 }
 
-.searchButton , .addButton{
+.searchButton , .addButton, .edit , .delete{
   width: 40px;
   height: 30px;
   border: 1px solid gainsboro;
@@ -57,6 +58,21 @@ th{
   padding: 1px;
 }
 
+.edit{
+    height: 40px;
+    background-color: rgba(0, 128, 0, 0.548);
+}
+
+.delete{
+    height: 40px;
+    background-color: rgba(255, 0, 0, 0.548);
+}
+
 .addButton{
   margin-left: 5px;
+}
+
+.action{
+    min-width: 100px;
+    text-align: center;
 }

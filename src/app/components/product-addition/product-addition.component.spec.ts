@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { ProductAdditionComponent } from './product-addition.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 describe('ProductAdditionComponent', () => {
   let component: ProductAdditionComponent;
@@ -8,8 +11,9 @@ describe('ProductAdditionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [ ProductAdditionComponent ]
+      imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+      declarations: [ ProductAdditionComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   });
@@ -23,4 +27,19 @@ describe('ProductAdditionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('form invalid when empty', () => {
+    expect(component.form.valid).toBeFalsy();
+  });
+
+  it('stock balance should be numbers only'), () => {
+    let stockBalance = component.form.controls['stock_balance'];
+    stockBalance.setValue("12345");
+    expect(stockBalance).toMatch("/^[-\s0-9၀-၉]*$/");
+  }
+
+  it('Price balance should be numbers only'), () => {
+    let stockBalance = component.form.controls['price'];
+    expect(stockBalance).toMatch("/^[-\s0-9၀-၉]*$/");
+  }
 });

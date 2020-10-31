@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { EncryptService } from 'src/app/encryption-service/encrypt.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -11,28 +13,68 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private fb: FormBuilder,
+    public productService: ProductService,
+    private encryptService: EncryptService,
   ) { }
 
-  ngOnInit(): void {
-  }
-
-  email = '';
-  password = '';
+  form: FormGroup;
   message = false;
   messageText = '';
-  title = 'I love pizza!'
+  token: any;
+  user = {
+    email: '',
+    password: '',
+    type: 'POST',
+  }
+  encPassword = "k#yF0^#nc^ypt?0#"
+
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [
+        Validators.required,]],
+      password: ['', [
+        Validators.required,]],
+    });
+  }
 
   login(): void{
-    if(this.email == '' || this.password == ''){
-      this.message = true;
-      this.messageText = "Please fill all the fields";
-      setTimeout(() => {
-        this.message = false;
-      }, 4000);
+    if(!this.form.valid){
+      this.showMessage("Please fill all the fields!");
     }
     else{
-      this.router.navigate(['/home']);
+      console.log("it reached here!");
+      this.user.email = this.form.value.email;
+      this.user.password = this.form.value.password;
+      this.productService.login(this.user)
+      .subscribe(
+        response => {
+          this.token = this.encryptService.encrypt(response['token']);
+          sessionStorage.setItem("token", this.token);
+          this.router.navigate(['/home']);
+        },
+        error => {
+          if(error.status == 404){
+            this.showMessage("User not found.");
+          }
+          else if(error.status == 403){
+            this.showMessage("Incorrect password.");
+          }
+          else{
+            this.showMessage("Internal server error.");
+          }
+        }
+      )
     }
+  }
+
+  showMessage(text){
+    this.message = true;
+    this.messageText = text;
+    setTimeout(() => {
+      this.message = false;
+    }, 4000);
   }
 
 }

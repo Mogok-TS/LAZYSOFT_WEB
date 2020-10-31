@@ -13,9 +13,13 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token") == ''){
+      this.router.navigate(['/login']);
+    }
   }
   
   logout():void{
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 

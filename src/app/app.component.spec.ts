@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -16,8 +18,11 @@ describe('AppComponent', () => {
       platformBrowserDynamicTesting());
     await TestBed.configureTestingModule({
       imports: [
+        AppModule,
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent
@@ -38,10 +43,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ProductItemModule');
   });
 
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('.content span').textContent).toContain('ProductItemModule app is running!');
-  // });
 });
