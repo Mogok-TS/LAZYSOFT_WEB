@@ -1,10 +1,11 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
 import { WarehouseService } from 'src/app/warehouse_services/warehouse.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import * as CryptoJS from '../../../../node_modules/crypto-js';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +19,7 @@ export class ProductListComponent implements OnInit {
     private encryptService: EncryptService,
     private productService: ProductService,
     private warehouseService: WarehouseService,
+    private route: ActivatedRoute,
   ) { }
 
   token: any;
@@ -34,7 +36,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.warehouse = this.warehouseService.getWarehouseList();
     this.encryptedToken = sessionStorage.getItem("token");
-    this.token = this.encryptService.decrypt(this.encryptedToken);
+    this.token = CryptoJS.AES.decrypt(this.encryptedToken, "MySecretKeyForEncryption&Descryption");
+    console.log("--->>" + this.token);
     this.headers = new HttpHeaders()
       .set('token', this.token);
     this.getProductItemList();

@@ -17,7 +17,7 @@ export class ProductEditionComponent implements OnInit {
 
   constructor(
     private warehouseService: WarehouseService,
-    private encryptService: EncryptService,
+    // private encryptService: EncryptService,
     private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class ProductEditionComponent implements OnInit {
   ngOnInit(): void {
     this.warehouseList = this.warehouseService.getWarehouseList();
     this.encryptedToken = sessionStorage.getItem("token");
-    this.token = this.encryptService.decrypt(this.encryptedToken);
+    // this.token = this.encryptService.decrypt(this.encryptedToken);
     this.itemID = this.route.snapshot.paramMap.get('id');
     this.headers = new HttpHeaders()
       .set('token', this.token);

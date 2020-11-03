@@ -102,12 +102,14 @@
 
 .message{
     border: 1px solid orange;
-    float: right;
     background-color: #ffa5004a;
     line-height: 2;
     padding: 10px;
     text-align: center;
     margin-top: 10px;
+    position: absolute;
+    z-index: 1000;
+    right: 0;
 }
 
 

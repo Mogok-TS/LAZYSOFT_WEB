@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
+import * as CryptoJS from '../../../../node_modules/crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +29,14 @@ export class LoginComponent implements OnInit {
     type: 'POST',
   }
   encPassword = "k#yF0^#nc^ypt?0#"
+  test: any;
 
 
   ngOnInit(): void {
+
+    
+
+
     this.form = this.fb.group({
       email: ['', [
         Validators.required,]],
@@ -44,15 +50,14 @@ export class LoginComponent implements OnInit {
       this.showMessage("Please fill all the fields!");
     }
     else{
-      console.log("it reached here!");
       this.user.email = this.form.value.email;
       this.user.password = this.form.value.password;
       this.productService.login(this.user)
       .subscribe(
         response => {
-          this.token = this.encryptService.encrypt(response['token']);
+          this.token = this.encryptService.encrypt(response["token"]);
           sessionStorage.setItem("token", this.token);
-          this.router.navigate(['/home']);
+          this.router.navigate([`/home`]);
         },
         error => {
           if(error.status == 404){

@@ -38,7 +38,6 @@ describe('ProductAdditionComponent', () => {
 
   it('stock balance should be numbers only'), () => {
     let stockBalance = component.form.controls['stock_balance'];
-    stockBalance.setValue("12345");
     expect(stockBalance).toMatch("/^[-\s0-9၀-၉]*$/");
   }
 
