@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -17,7 +17,7 @@ export class ProductEditionComponent implements OnInit {
 
   constructor(
     private warehouseService: WarehouseService,
-    // private encryptService: EncryptService,
+    private encryptService: EncryptService,
     private router: Router,
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -28,8 +28,8 @@ export class ProductEditionComponent implements OnInit {
 
   ngOnInit(): void {
     this.warehouseList = this.warehouseService.getWarehouseList();
-    this.encryptedToken = sessionStorage.getItem("token");
-    // this.token = this.encryptService.decrypt(this.encryptedToken);
+    this.encryptedToken = '' + sessionStorage.getItem("token");
+    this.token = this.encryptService.decrypt(this.encryptedToken);
     this.itemID = this.route.snapshot.paramMap.get('id');
     this.headers = new HttpHeaders()
       .set('token', this.token);

@@ -28,7 +28,7 @@ export class ProductAdditionComponent implements OnInit {
 
   ngOnInit(): void {
     this.warehouse = this.warehouseService.getWarehouseList();
-    this.encryptedToken = sessionStorage.getItem("token");
+    this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.headers = new HttpHeaders()
       .set('token', this.token);

@@ -1,0 +1,13 @@
+.table-left{
+    width: 40%
+}
+tr{
+    vertical-align: top;
+    min-height: 40px;
+}
+.table-tr{
+    height: 40px;
+}
+.row{
+    margin-left: 0;
+}

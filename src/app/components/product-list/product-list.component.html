@@ -10,7 +10,7 @@
                     <i class="fa fa-search"></i>
                 </div>
                 <div class = "addButton" (click) = "addNewProduct()">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <i class="fa fa-plus" aria-hidden="divue"></i>
                 </div>
             </div>
         </div>
@@ -19,65 +19,34 @@
             <div class = "message" *ngIf = "noData">
                 No product found!
             </div>
-            <div *ngFor="let item of displayList;" class = "product">
-                <div class = "img-container">
-                        <img src="http://localhost:5000/{{item.image_path}}">
+            <div *ngFor="let item of displayList;" class="product">
+                <div class="img-container">
+                    <img src="http://localhost:5000/{{item.image_path}}">
                 </div>
-                <div class = "list-table">
-                    <table>
-                        <tr>
-                            <td class = "table-left">Name</td>
-                            <td>{{item.name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Stock Balance</td>
-                            <td>{{item.stock_balance}}</td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>{{item.price}}&nbsp;&nbsp;Ks</td>
-                        </tr>
-                        <tr>
-                            <td>Warehouse</td>
-                            <td>{{item.warehouse}}</td>
-                        </tr>
-                        <tr>
-                            <td>description</td>
-                            <td>
-                                <div class="line-clamp">
-                                    {{item.description}}
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="list-table">
+                    <div class = "name">
+                        {{item.name}}
+                    </div>
+                    <div class = "text">
+                        {{item.price}}&nbsp;&nbsp;Ks
+                    </div>
+                    <div class = "text">
+                        {{item.warehouse}}
+                    </div>
                 </div>
-                <div class="overlay"></div>
-                <div class="row button">
+                <div class="d-flex justify-content-between">
+                    <div class="detail d-flex align-items-center justify-content-center" (click)="productDetail(item.autoID)"
+                        title="Details">
+                        <i class="fas fa-bars"></i>
+                    </div>
                     <div class="edit d-flex align-items-center justify-content-center" (click)="editPage(item.itemID)" title="Edit">
                         <i class="far fa-edit"></i>
                     </div>
-                    &nbsp;&nbsp;
                     <div class="delete d-flex align-items-center justify-content-center" (click)="confirmBox(item.autoID)"
                         title="Delete">
                         <i class="far fa-trash-alt"></i>
                     </div>
                 </div>
-                <!-- <div class = "buttons">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="edit d-flex align-items-center justify-content-center" (click)="editPage(item.itemID)">
-                                    <i class="far fa-edit" title="Edit"></i>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="delete d-flex align-items-center justify-content-center" (click)="confirmBox(item.autoID)">
-                                    <i class="far fa-trash-alt" title="Delete"></i>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div> -->
             </div>
         </div>
     </div>

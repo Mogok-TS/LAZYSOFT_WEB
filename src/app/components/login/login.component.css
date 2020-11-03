@@ -5,62 +5,18 @@
     padding-right: 2%;
     padding-top: 2%;
     padding-bottom: 2%;  
-    margin: auto;
+    margin: 5%;
 }
 
 .image{
     text-align: center;
 }
 
-@media only screen and (max-width: 768px) and (min-width: 477px) {
-    .image{
-        display: none;
-    }
-    .login{
-        background-color:gainsboro;
-        width: 350px;
-        padding-left: 2%;
-        padding-right: 2%;
-        padding-top: 2%;
-        padding-bottom: 2%;  
-        margin:auto;
-    }
-    .btn{
-        width: 100%;
-        border-radius: 0;
-        line-height: 2;
-        background-color: white;
-    }
-}
-
-@media only screen and (max-width: 476px){
-    .image{
-        display: none;
-    }
-    .login{
-        background-color:gainsboro;
-        width: 95%;
-        padding-left: 2%;
-        padding-right: 2%;
-        padding-top: 2%;
-        padding-bottom: 2%;  
-        margin: auto;
-    }
-    .btn{
-        width: 100%;
-        border-radius: 0;
-        line-height: 2;
-        background-color: white;
-    }
-}
-
-@media only screen and (min-width: 769px){
-    .btn{
-    width: 100%;
-    border-radius: 0;
-    line-height: 2;
-    background-color: #ebb7c3;
-    }
+.btn{
+width: 100%;
+border-radius: 0;
+line-height: 2;
+background-color: #9999d0;
 }
 
 
@@ -79,7 +35,7 @@
 }
 
 .bg{
-    background-color: white;
+    background-color: whitesmoke;
     width: 100%;
     background-position: center;
     position: absolute;
@@ -134,4 +90,16 @@
 .input-group-text{
     width: 50px;
     padding-left: 15px;
+    background-color: whitesmoke;
+}
+
+.form-control:focus{
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child) {
+    border-left: none;
+    background-color: whitesmoke;
 }

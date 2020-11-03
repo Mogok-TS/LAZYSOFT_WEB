@@ -11,7 +11,7 @@
 
 body{
     font-family: 'Ubuntu';
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 .logo{
@@ -23,6 +23,10 @@ body{
       padding: 30px;
       overflow: auto;
     }
+    .navbar{
+      padding-left: 30px;
+      padding-right: 30px;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
@@ -31,6 +35,10 @@ body{
         padding-bottom: 30px;
         padding-left: 50px;
         padding-right: 50px;
+    }
+    .navbar{
+      padding-left: 50px;
+      padding-right: 50px;
     }
 }
 
@@ -51,9 +59,10 @@ body{
   border-radius: 0; 
 }
 
-.input-form{
+.input-form, .details{
   padding: 30px;
   border: 1px solid rgba(0,0,0,0.1);
+  background-color: white;
 }
 
 .custom-select{
@@ -92,13 +101,6 @@ body{
   cursor: pointer;
 }
 
-.swal2-popup {
-  margin-top: 50px;
-  font-size: .8rem !important;
-  background-color: white;
-  border-radius: 0;
-}
-
 .input-group-text{
   border-radius: 0;
 }
@@ -118,5 +120,23 @@ body{
   font-size: inherit;
 }
 
+/* ----------Testing ------------- */
+.input-group:focus-within {
+  border-color: #497b9c;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(100, 123, 255, 0.5);
+}
+.input-group:focus-within *:focus {
+  outline: 0;
+}
+
+.form-control:focus{
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
+
+input:focus, textarea:focus, select:focus{
+        outline: none;
+}
 
 

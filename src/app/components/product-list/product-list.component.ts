@@ -5,7 +5,6 @@ import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
 import { WarehouseService } from 'src/app/warehouse_services/warehouse.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import * as CryptoJS from '../../../../node_modules/crypto-js';
 
 @Component({
   selector: 'app-product-list',
@@ -35,16 +34,23 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.warehouse = this.warehouseService.getWarehouseList();
-    this.encryptedToken = sessionStorage.getItem("token");
-    this.token = CryptoJS.AES.decrypt(this.encryptedToken, "MySecretKeyForEncryption&Descryption");
+    this.encryptedToken = '' + sessionStorage.getItem("token");
+    this.token = this.encryptService.decrypt(this.encryptedToken);
     console.log("--->>" + this.token);
     this.headers = new HttpHeaders()
       .set('token', this.token);
     this.getProductItemList();
   }
 
+
   addNewProduct(): void{
      this.router.navigate(['/home/product-addition']);
+  }
+  editPage(id): void {
+    this.router.navigate([`/home/product-edition/${id}`]);
+  }
+  productDetail(id): void{
+    this.router.navigate([`/home/product-detail/${id}`]);
   }
 
   getProductItemList(): void{
@@ -95,18 +101,12 @@ export class ProductListComponent implements OnInit {
     )
   }
 
-  editPage(id): void{
-    this.router.navigate([`/home/product-edition/${id}`]);
-  }
-
   searchBar(): void{
     this.searchData = [];
     if (this.search != '') {
       for (let i = 0; i < this.productList.length; i++) {
         if (this.productList[i].name.replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) ||
-          this.productList[i].stock_balance.toString().replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) || 
           this.productList[i].price.toString().replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) ||
-          this.productList[i].description.replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) ||
           this.productList[i].warehouse.replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase())  
         ) {
           this.searchData.push(this.productList[i]);
