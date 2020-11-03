@@ -5,6 +5,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { HttpHeaders } from '@angular/common/http';
+import { ImageCompressorService, CompressorConfig } from 'ngx-image-compressor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-addition',
@@ -20,6 +22,8 @@ export class ProductAdditionComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private encryptService: EncryptService,
+    private imageCompressor: ImageCompressorService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +61,7 @@ export class ProductAdditionComponent implements OnInit {
   priceValidate = true;
 
 
-  submit():void{
+  async submit(){
     if(!this.form.valid){
       this.showMessage("warn", "Please fill all the required fields.");
     }
@@ -72,6 +76,9 @@ export class ProductAdditionComponent implements OnInit {
     }
     else{
       this.spinner.show();
+      if (this.imageObj.size > 1048576) {
+        this.imageObj = await this.compressImage(this.imageObj);
+      }
       const form = new FormData();
       form.append('image', this.imageObj);
       form.append('name', this.form.value.name);
@@ -152,4 +159,22 @@ export class ProductAdditionComponent implements OnInit {
       }, 4000);
     }
   }
+
+  async compressImage(file) {
+    var temp;
+    const config: CompressorConfig = { orientation: 1, ratio: 50, quality: 50, enableLogs: true };
+    temp = await this.imageCompressor.compressFile(file, config);
+    console.warn(temp.size);
+    if (temp.size > 1048576) {
+      return this.compressImage(temp);
+    }
+    else {
+      return temp;
+    }
+  }
+
+  redirectHome():void{
+    this.router.navigate(['/home']);
+  }
+
 }

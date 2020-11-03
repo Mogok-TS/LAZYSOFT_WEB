@@ -12,6 +12,13 @@
     </div>
 </div>
 <div class="col-12 pageview" id="pageview">
+    <div class="tabs">
+        <small class="redirect-btn" (click)="redirectHome()">Home</small>
+        &nbsp;&nbsp;&nbsp;
+        /
+        &nbsp;&nbsp;&nbsp;
+        <a>Edit product</a>
+    </div>
     <div class="input-form">
         <div>
             <h4>Edit Product</h4>
@@ -22,11 +29,11 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="name">Name&nbsp;<strong class="required">*</strong></label>
+                            <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" formControlName="name"/>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="stock_balance">Stock Balance&nbsp;<strong class="required">*</strong></label>
+                            <label for="stock_balance">Stock Balance</label>
                             <input type="text" class="form-control" id="stock_balance" name="stock_balance"
                                 formControlName="stock_balance" (ngModelChange)="validateStockBalance()" />
                             <a *ngIf="!stockValidate"><small class="required">*Numbers only!</small></a>
@@ -34,13 +41,18 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="price">Price&nbsp;<strong class="required">*</strong></label>
-                            <input type="text" class="form-control" id="price" name="price" formControlName="price"
-                                (ngModelChange)="validatePrice()">
+                            <label for="price">Price</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="price" name="price" formControlName="price"
+                                    (ngModelChange)="validatePrice()">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">Ks</span>
+                                </div>
+                            </div>
                             <div *ngIf="!priceValidate"><small class="required">*Numbers only!</small></div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="warehouse">Warehouse&nbsp;<strong class="required">*</strong></label>
+                            <label for="warehouse">Warehouse</label>
                             <select class="browser-default custom-select" name="warehouse" id="warehouse"
                                 formControlName="warehouse">
                                 <option [value]="w_house['id']" *ngFor="let w_house of warehouseList" [selected]="w_house.name == warehouse">{{w_house.name}}
@@ -49,7 +61,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description">Description&nbsp;<strong class="required">*</strong></label>
+                        <label for="description">Description</label>
                         <textarea type="text" class="form-control textarea" id="description" name="description"
                             formControlName="description">
                         </textarea>
@@ -57,7 +69,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="image">Thumbnail&nbsp;<strong class="required">*</strong></label>
+                        <label for="image">Thumbnail</label>
                         <div class="form-group center">
                             <input type="file" name="file" id="file" class="input-file" (change)="onImagePicked($event)"
                                 accept="image/jpeg, image/jpg">

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
+import { WarehouseService } from 'src/app/warehouse_services/warehouse.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-product-list',
@@ -15,14 +17,22 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private encryptService: EncryptService,
     private productService: ProductService,
+    private warehouseService: WarehouseService,
   ) { }
 
   token: any;
   encryptedToken: any;
   headers: any;
-  productList: any;
+  productList: any = [];
+  displayList: any;
+  search = '';
+  searchData : any;
+  warehouse: any;
+  noData = false;
+
 
   ngOnInit(): void {
+    this.warehouse = this.warehouseService.getWarehouseList();
     this.encryptedToken = sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.headers = new HttpHeaders()
@@ -42,7 +52,22 @@ export class ProductListComponent implements OnInit {
     .subscribe(
       data => {
         this.productList = data;
-        console.log(this.productList);
+        this.productList.forEach((item) => { 
+          for (let i = 0; i < this.warehouse.length; i++) {
+            if (item.warehouse.toString() == this.warehouse[i]['id']) {
+              item.warehouse = this.warehouse[i]['name'];
+              console.log(item.warehouse);
+            }
+          };
+        });
+        this.displayList = this.productList;
+        if(this.displayList.length > 0)
+        {
+          this.noData = false;
+        }
+        else{
+          this.noData = true;
+        }
       },
       error => {
         console.log(error);
@@ -69,6 +94,48 @@ export class ProductListComponent implements OnInit {
 
   editPage(id): void{
     this.router.navigate([`/home/product-edition/${id}`]);
+  }
+
+  searchBar(): void{
+    this.searchData = [];
+    if (this.search != '') {
+      for (let i = 0; i < this.productList.length; i++) {
+        if (this.productList[i].name.replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) ||
+          this.productList[i].stock_balance.toString().replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) || 
+          this.productList[i].price.toString().replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) ||
+          this.productList[i].description.replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase()) ||
+          this.productList[i].warehouse.replace(/\s/g, "").toLowerCase().includes(this.search.replace(/\s/g, "").toLowerCase())  
+        ) {
+          this.searchData.push(this.productList[i]);
+        }
+      }
+      this.displayList = this.searchData;
+    }
+    else{
+      this.displayList = this.productList;
+    }
+    if(this.displayList.length > 0 ){
+      this.noData = false;
+    }
+    else{
+      this.noData = true;
+    }
+  }
+
+  confirmBox(id) {
+    Swal.fire({
+      width: 300,
+      text: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: '<i class="fa fa-close"></i>',
+      confirmButtonText: '<i class="fa fa-check"></i>'
+    }).then((result) => {
+      if (result.value) {
+        this.deleteItem(id);
+      }
+    })
   }
 
 }

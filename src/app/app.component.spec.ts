@@ -2,6 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NgxSpinnerService } from "ngx-spinner";
+import { NgxImageCompressorModule } from 'ngx-image-compressor';
+import { ImageCompressorService } from 'ngx-image-compressor';
+
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
@@ -22,11 +26,13 @@ describe('AppComponent', () => {
         RouterTestingModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        NgxImageCompressorModule
       ],
       declarations: [
         AppComponent
       ],
+      providers: [NgxSpinnerService, ImageCompressorService], 
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

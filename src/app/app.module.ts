@@ -15,6 +15,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxImageCompressorModule } from 'ngx-image-compressor';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     CommonModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    NgxImageCompressorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
