@@ -12,10 +12,14 @@ export class EncryptService {
   salt = CryptoJS.lib.WordArray.random(128 / 8);
   iv = CryptoJS.lib.WordArray.random(128 / 8);
 
+
+  // for encryption 
   encrypt(value: string): string {
     return CryptoJS.AES.encrypt(value, this.secretKey).toString();
   }
 
+
+  // for decryption
   decrypt(textToDecrypt) : string {
     return CryptoJS.AES.decrypt(textToDecrypt.toString(), this.secretKey).toString(CryptoJS.enc.Utf8);
   }

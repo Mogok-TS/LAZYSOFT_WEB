@@ -31,7 +31,7 @@ export class ProductService {
     return this.http.post(`${baseUrl}/items/get`, data, { headers: headers });
   }
 
-  //Get the list of product items
+  //delete product item
   deleteProductItem(data, headers): Observable<any> {
     return this.http.post(`${baseUrl}/items/delete`, data, { headers: headers });
   }
@@ -39,6 +39,11 @@ export class ProductService {
   //update product item
   updateProductItem(form, headers): Observable<any> {
     return this.http.post(`${baseUrl}/items/update`, form, { headers: headers });
+  }
+
+  //get warehouse list
+  getWarehoustList(data, headers): Observable<any>{
+    return this.http.post(`${baseUrl}/warehouse/getAll`, data , { headers: headers });
   }
 
 

@@ -29,7 +29,7 @@
         <div>
             <h4>New product</h4>
         </div>
-        <br>
+        <hr>
         <form (ngSubmit) = "submit()" [formGroup] = "form">
             <div class = "row">
                 <div class = "col-md-6">
@@ -61,7 +61,7 @@
                         <label for="warehouse" >Warehouse</label>
                         <div class = "input-group">
                             <select class="browser-default custom-select" name="warehouse" id="warehouse" formControlName="warehouse">
-                                <option [value]="w_house['id']" *ngFor="let w_house of warehouse">{{w_house.name}}</option>
+                                <option [value]="w_house.id" *ngFor="let w_house of warehouse">{{w_house.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -77,11 +77,13 @@
                     <div class="form-group">
                         <label for="image">Image</label>
                         <div class="form-group center">
-                            <input type="file" name="file" id="file" class="input-file" (change)="onImagePicked($event)"
-                                accept="image/jpeg, image/jpg, image/png">
-                            <label for="file" class="btn btn-select">
-                                <i class="fas fa-cloud-upload-alt">&nbsp;&nbsp;</i>Upload
-                            </label>
+                            <div class = "input-group">
+                                <input type="file" name="file" id="file" class="input-file" (change)="onImagePicked($event)"
+                                    accept="image/jpeg, image/jpg, image/png">
+                                <label for="file" class="btn btn-select">
+                                    <i class="fas fa-cloud-upload-alt">&nbsp;&nbsp;</i>Upload
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div *ngIf = "imageUrl">
@@ -90,7 +92,7 @@
                         <hr>
                     </div>
                     <div>
-                        <button class = "btn submit">Submit &nbsp;&nbsp; <i class="fas fa-arrow-circle-right"></i></button>
+                        <button class = "btn submit"><i class="fas fa-check"></i></button>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProductListComponent } from './product-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination'; 
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -9,8 +11,9 @@ describe('ProductListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule],
-      declarations: [ ProductListComponent ]
+      imports: [RouterTestingModule, HttpClientModule, NgxPaginationModule],
+      declarations: [ ProductListComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   });

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
-import { WarehouseService } from 'src/app/warehouse_services/warehouse.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
@@ -17,7 +16,6 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private encryptService: EncryptService,
     private productService: ProductService,
-    private warehouseService: WarehouseService,
     private route: ActivatedRoute,
   ) { }
 
@@ -36,30 +34,56 @@ export class ProductListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.warehouse = this.warehouseService.getWarehouseList();
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
     console.log("--->>" + this.token);
     this.headers = new HttpHeaders()
       .set('token', this.token);
+
+    this.getWarehouseList();
     this.getProductItemList();
   }
 
-
+  // redirect user to new product addition page
   addNewProduct(): void{
      this.router.navigate(['/home/product-addition']);
   }
+
+  //redirect user to product edition page
   editPage(id): void {
     this.router.navigate([`/home/product-edition/${id}`]);
   }
+
+  //redirect user to product detail page
   productDetail(id): void{
     this.router.navigate([`/home/product-detail/${id}`]);
   }
 
+
+
+  //Get warehouse list
+  getWarehouseList(): void {
+    const data = {
+      'type': 'GET'
+    }
+    this.productService.getWarehoustList(data, this.headers)
+      .subscribe(
+        data => {
+          this.warehouse = data['data'];
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
+  // getting product item list
   getProductItemList(): void{
     const data = {
       type : 'GET',
     }
+
+    // get product item list from database through api
     this.productService.getProductItemList(data, this.headers)
     .subscribe(
       data => {
@@ -73,6 +97,8 @@ export class ProductListComponent implements OnInit {
           };
         });
         this.displayList = this.productList;
+  
+        //checking there is product data or not
         if(this.displayList.length > 0)
         {
           this.noData = false;
@@ -80,12 +106,15 @@ export class ProductListComponent implements OnInit {
         else{
           this.noData = true;
         }
+
+        //checking if the pagination control should display or not
         if (this.displayList.length > 12) {
           this.showPagination = true;
         }
         else {
           this.showPagination = false;
         }
+
       },
       error => {
         console.log(error);
@@ -93,11 +122,14 @@ export class ProductListComponent implements OnInit {
     )
   }
 
+  // deleting product item
   deleteItem(id): void{
     const data = {
       itemID : id,
       type: "DELETE",
     }
+
+    //delete product from database through api
     this.productService.deleteProductItem(data, this.headers)
     .subscribe(
       response => {
@@ -110,6 +142,7 @@ export class ProductListComponent implements OnInit {
     )
   }
 
+  //if user types in search bar 
   searchBar(): void{
     this.searchData = [];
     if (this.search != '') {
@@ -126,12 +159,16 @@ export class ProductListComponent implements OnInit {
     else{
       this.displayList = this.productList;
     }
+
+    //checking if there is no data or not 
     if(this.displayList.length > 0 ){
       this.noData = false;
     }
     else{
       this.noData = true;
     }
+
+    //checking if the pagination control should display or not
     if (this.displayList.length > 12) {
       this.showPagination = true;
     }
@@ -140,6 +177,7 @@ export class ProductListComponent implements OnInit {
     }
   }
 
+  // confirmation box for deleting items
   confirmBox(id) {
     Swal.fire({
       width: 300,
@@ -156,10 +194,10 @@ export class ProductListComponent implements OnInit {
     })
   }
 
+  // for search box input focus design
   focusSearch(){
     this.searchFocus = true;
   }
-
   focusoutSearch(){
     this.searchFocus = false;
   }

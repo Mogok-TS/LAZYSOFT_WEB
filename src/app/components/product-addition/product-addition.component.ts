@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WarehouseService } from 'src/app/warehouse_services/warehouse.service'; 
 import { ProductService } from 'src/app/services/product.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +16,6 @@ import { Router } from '@angular/router';
 export class ProductAdditionComponent implements OnInit {
 
   constructor(
-    private warehouseService: WarehouseService,
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
@@ -27,11 +25,14 @@ export class ProductAdditionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.warehouse = this.warehouseService.getWarehouseList();
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
+
+    // set token to http header
     this.headers = new HttpHeaders()
       .set('token', this.token);
+    this.getWarehouseList();
+    // form validation 
     this.form = this.fb.group({
       name: ['', [
         Validators.required,]],
@@ -61,21 +62,31 @@ export class ProductAdditionComponent implements OnInit {
   priceValidate = true;
 
 
+  // submit the product addition form
   async submit(){
+
+    // check form is valid or not
     if(!this.form.valid){
       this.showMessage("warn", "Please fill all the required fields.");
     }
+
+    //check if the user is selected an image or not
     else if(this.checkImage() == false){
       this.showMessage("warn", "Please select thumbnail photo.");
     }
+
+    // check if the stock balance is numbers only or not
     else if(this.stockValidate == false){
       this.showMessage("warn", "Stock balance should be numbers only.");
     }
+
+    // check price is numbers only or not
     else if(this.priceValidate == false){
       this.showMessage("warn", "Price should be numbers only.");
     }
     else{
       this.spinner.show();
+      // compress image if the image size is larger than 1Mb
       if (this.imageObj.size > 1048576) {
         this.imageObj = await this.compressImage(this.imageObj);
       }
@@ -88,6 +99,7 @@ export class ProductAdditionComponent implements OnInit {
       form.append('description', this.form.value.description);
       form.append('type', 'POST');
 
+      // post data form to database throung api server
       this.productService.addNewProductItem(form, this.headers)
       .subscribe(
         response => {
@@ -107,12 +119,31 @@ export class ProductAdditionComponent implements OnInit {
     }
   }
 
+  //Get warehouse list
+  getWarehouseList(): void{
+    const data = {
+      'type' : 'GET'
+    }
+    this.productService.getWarehoustList(data, this.headers)
+    .subscribe(
+      data => {
+        this.warehouse  = data['data'];
+        console.log(this.warehouse);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  // store the image that user selected
   onImagePicked(event: Event): void {
     const FILE = (event.target as HTMLInputElement).files[0];
     this.preview(FILE);
     this.imageObj = FILE;
   }
 
+  // for previewing the selected image
   preview(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
@@ -121,6 +152,7 @@ export class ProductAdditionComponent implements OnInit {
     }
   }
 
+  // checking if the user is selected an image or not
   checkImage(){
     if(this.imageObj == null){
       return false;
@@ -130,17 +162,19 @@ export class ProductAdditionComponent implements OnInit {
     }
   }
 
-
+  // validate stock balance to be numbers only
   validateStockBalance(){
     const regularExpression = /^[-\s0-9၀-၉]*$/;
     this.stockValidate = regularExpression.test(String(this.form.value.stock_balance).toLowerCase());
   }
 
+  // validate price to be numbers only
   validatePrice(){
     const regularExpression = /^[-\s0-9၀-၉]*$/;
     this.priceValidate = regularExpression.test(String(this.form.value.price).toLowerCase());
   }
 
+  // show warning and success message boxes
   showMessage(type, text): void{
     if(type == "warn"){
       this.warnMessage = true;
@@ -164,6 +198,7 @@ export class ProductAdditionComponent implements OnInit {
     }
   }
 
+  // compress image size
   async compressImage(file) {
     var temp;
     const config: CompressorConfig = { orientation: 1, ratio: 50, quality: 50, enableLogs: true };
@@ -177,10 +212,12 @@ export class ProductAdditionComponent implements OnInit {
     }
   }
 
+  // redirect user to home page
   redirectHome():void{
     this.router.navigate(['/home']);
   }
 
+  //close message box
   closeMessage(){
     this.warnMessage = false;
     this.successMessage = false;

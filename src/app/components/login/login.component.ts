@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
-import * as CryptoJS from '../../../../node_modules/crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -35,10 +34,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-
-    
-
-
+    //Form validation check
     this.form = this.fb.group({
       email: ['', [
         Validators.required,]],
@@ -47,20 +43,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // Authenticate user login 
   login(): void{
+
+    // Check form is valid or not
     if(!this.form.valid){
       this.showMessage("Please fill all the fields!");
     }
     else{
       this.user.email = this.form.value.email;
       this.user.password = this.form.value.password;
+
+      // check user in database 
       this.productService.login(this.user)
       .subscribe(
+        
+        //when user is valid or exist
         response => {
           this.token = this.encryptService.encrypt(response["token"]);
           sessionStorage.setItem("token", this.token);
           this.router.navigate([`/home`]);
         },
+
+        // User not exist or password wrong
         error => {
           if(error.status == 404){
             this.showMessage("User not found.");
@@ -76,6 +81,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //show warning message box
   showMessage(text){
     this.message = true;
     this.messageText = text;
@@ -86,13 +92,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //for input focus designs
   focusEmail(): void{
     this.emailFocus = true;
   }
   focusoutEmail(): void{
     this.emailFocus = false;
   }
-
   focusPassword(): void {
     this.passwordFocus = true;
   }
@@ -100,7 +106,7 @@ export class LoginComponent implements OnInit {
     this.passwordFocus = false;
   }
 
-
+  // for closing warning message box
   closeMessage(){
     this.message = false;
   }

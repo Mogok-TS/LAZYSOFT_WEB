@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
-import { WarehouseService } from 'src/app/warehouse_services/warehouse.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ImageCompressorService, CompressorConfig } from 'ngx-image-compressor';
 
@@ -16,7 +15,6 @@ import { ImageCompressorService, CompressorConfig } from 'ngx-image-compressor';
 export class ProductEditionComponent implements OnInit {
 
   constructor(
-    private warehouseService: WarehouseService,
     private encryptService: EncryptService,
     private router: Router,
     private productService: ProductService,
@@ -27,14 +25,17 @@ export class ProductEditionComponent implements OnInit {
   ) {  }
 
   ngOnInit(): void {
-    this.warehouseList = this.warehouseService.getWarehouseList();
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.itemID = this.route.snapshot.paramMap.get('id');
-    console.log("this is item id ---> " + this.itemID);
+
+    //set token to http headers
     this.headers = new HttpHeaders()
       .set('token', this.token);
+    this.getWarehouseList();
     this.getProductItem();
+
+    //form validation
     this.form = this.fb.group({
       name: ['', [
         Validators.required,]],
@@ -71,11 +72,31 @@ export class ProductEditionComponent implements OnInit {
   description: any;
 
 
+  //Get warehouse list
+  getWarehouseList(): void {
+    const data = {
+      'type': 'GET'
+    }
+    this.productService.getWarehoustList(data, this.headers)
+      .subscribe(
+        data => {
+          this.warehouseList = data['data'];
+          console.log(this.warehouse);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
+  // get the product data
   getProductItem(): void{
     const data = {
       type: "GET",
       itemID: this.itemID,
     }
+
+    //get product data from database
     this.productService.getProductItem(data, this.headers)
     .subscribe(
       data => {
@@ -105,12 +126,14 @@ export class ProductEditionComponent implements OnInit {
     )
   }
 
+  // store the image user selected
   onImagePicked(event: Event): void {
     const FILE = (event.target as HTMLInputElement).files[0];
     this.preview(FILE);
     this.imageObj = FILE;
   }
 
+  // for previewing the image user has selected
   preview(file) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
@@ -118,16 +141,20 @@ export class ProductEditionComponent implements OnInit {
       this.imageUrl = reader.result;
     }
   }
+
+  // for validating stock balance to be numbers only
   validateStockBalance() {
     const regularExpression = /^[-\s0-9၀-၉]*$/;
     this.stockValidate = regularExpression.test(String(this.form.value.stock_balance).toLowerCase());
   }
 
+  // for validating price to be number only
   validatePrice() {
     const regularExpression = /^[-\s0-9၀-၉]*$/;
     this.priceValidate = regularExpression.test(String(this.form.value.price).toLowerCase());
   }
 
+  // for showing warning and success message box
   showMessage(type, text): void {
     if (type == "warn") {
       this.warnMessage = true;
@@ -151,18 +178,29 @@ export class ProductEditionComponent implements OnInit {
     }
   }
 
+  // updating the edited product details
   async submit(){
+
+    // checking form is valid or nor
     if (!this.form.valid) {
       this.showMessage("warn", "Please fill all the required fields.");
     }
+
+    // checking stock balance is numbers only or not
     else if (this.stockValidate == false) {
       this.showMessage("warn", "Stock balance should be numbers only.");
     }
+
+    // checking price is number only or not
     else if (this.priceValidate == false) {
       this.showMessage("warn", "Price should be numbers only.");
     }
+
+    //  user has selected an image to update
     else if(this.imageObj != null){
       this.spinner.show();
+
+      // compress image size if it is larger than 1Mb
       if (this.imageObj.size > 1048576) {
         this.imageObj = await this.compressImage(this.imageObj);
       }
@@ -177,6 +215,7 @@ export class ProductEditionComponent implements OnInit {
       form.append('imageName', this.oldImage)
       form.append('type', 'UPDATE');
 
+      // update data of product details through api
       this.productService.updateProductItem(form, this.headers)
         .subscribe(
           response => {
@@ -189,6 +228,8 @@ export class ProductEditionComponent implements OnInit {
           }
         )
     }
+
+    //user did not select an image to update
     else if(this.imageObj == null){
       this.spinner.show();
       const form = new FormData();
@@ -201,6 +242,7 @@ export class ProductEditionComponent implements OnInit {
       form.append('imageName', this.oldImage)
       form.append('type', 'UPDATE');
 
+      // update data of product details through api
       this.productService.updateProductItem(form, this.headers)
         .subscribe(
           response => {
@@ -215,6 +257,7 @@ export class ProductEditionComponent implements OnInit {
     }
   }
 
+  // for compressing image size
   async compressImage(file) {
     var temp;
     const config: CompressorConfig = { orientation: 1, ratio: 50, quality: 50, enableLogs: true };
@@ -228,10 +271,12 @@ export class ProductEditionComponent implements OnInit {
     }
   }
 
+  // redirect user to home page
   redirectHome(): void {
     this.router.navigate(['/home']);
   }
 
+  // close message box
   closeMessage() {
     this.warnMessage = false;
     this.successMessage = false;

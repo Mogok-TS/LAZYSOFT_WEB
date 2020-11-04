@@ -50,6 +50,9 @@
     .pageview{
       padding-top: 90px;
     }
+    .addButton{
+      width: 70px;
+    }
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 767px) {
@@ -65,6 +68,9 @@
     }
     .pageview{
       padding-top: 90px;
+    }
+    .addButton{
+      width: 70px;
     }
 }
 
@@ -110,7 +116,7 @@
 }
 
 .input-group{
-  box-shadow: 0 4px 10px -5px;
+  border: 1px solid #ccc;
 }
 
 .input-group-text{
@@ -127,7 +133,7 @@
   outline: 0;
 }
 
-.addButton, .edit , .delete, .detail{
+.edit , .delete, .detail{
   min-width: 40px;
   height: 30px;
   border: 1px solid gainsboro;
@@ -140,8 +146,22 @@
 }
 
 .addButton{
+  min-width: 40px;
+  height: 30px;
+  background: gainsboro;
+  text-align: center;
+  color:black;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 1px;
   margin-left: 5px;
 }
+
+.addButton:hover{
+  color: white;
+  background-color: #9999d0;
+}
+
 
 .action{
     min-width: 100px;

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
-import { WarehouseService } from 'src/app/warehouse_services/warehouse.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,17 +15,19 @@ export class ProductDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private warehouseService: WarehouseService,
     private encryptService : EncryptService,
   ) { }
 
   ngOnInit(): void {
-    this.warehouseList = this.warehouseService.getWarehouseList();
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.itemID = this.route.snapshot.paramMap.get('id');
+
+    //set token to http header
     this.headers = new HttpHeaders()
       .set('token', this.token);
+
+    this.getWarehouseList();
     this.getProductItem();
   }
 
@@ -44,15 +45,35 @@ export class ProductDetailComponent implements OnInit {
     description: ''
   }
 
+  // redirect user to home page
   redirectHome(): void{
     this.router.navigate(['/home']);
   }
 
+  //Get warehouse list
+  getWarehouseList(): void {
+    const data = {
+      'type': 'GET'
+    }
+    this.productService.getWarehoustList(data, this.headers)
+      .subscribe(
+        data => {
+          this.warehouseList = data['data'];
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
+  // get product data
   getProductItem(): void {
     const data = {
       type: "GET",
       itemID: this.itemID,
     }
+
+    //get product data from database
     this.productService.getProductItem(data, this.headers)
       .subscribe(
         data => {
@@ -66,7 +87,6 @@ export class ProductDetailComponent implements OnInit {
           this.productList.stockBalance = data.stock_balance;
           this.productList.description = data.description;
           this.imageUrl = `http://localhost:5000/${data.image_path}`;
-            console.log("---> " + data.image_path);
         },
         error => {
           console.log(error);

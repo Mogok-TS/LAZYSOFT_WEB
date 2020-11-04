@@ -17,7 +17,7 @@
                     <input type="text" class="searchTerm" placeholder="Search" [(ngModel)]="search" (ngModelChange)="searchBar()">
                 </div>
             </div>
-            <div class="addButton" (click)="addNewProduct()">
+            <div class="addButton d-flex align-items-center justify-content-center" (click)="addNewProduct()">
                 <i class="fa fa-plus" aria-hidden="divue"></i>
             </div>
         </div>
@@ -29,11 +29,11 @@
             <div class = "message" *ngIf = "noData">
                 No product found!
             </div>
-            <div *ngFor="let item of displayList | paginate: { itemsPerPage: 2, currentPage: p }" class="product" (click)="productDetail(item.itemID)" title= "Details">
-                <div class="img-container">
+            <div *ngFor="let item of displayList | paginate: { itemsPerPage: 12, currentPage: p }" class="product">
+                <div class="img-container" (click)="productDetail(item.itemID)" title= "Details">
                     <img src="http://localhost:5000/{{item.image_path}}">
                 </div>
-                <div class="list-table">
+                <div class="list-table" (click)="productDetail(item.itemID)" title= "Details">
                     <div class="name">
                         {{item.name}}
                     </div>
@@ -47,7 +47,7 @@
                 <div class="d-flex justify-content-between">
                     <div class="detail d-flex align-items-center justify-content-center" (click)="productDetail(item.itemID)"
                         title="Details">
-                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-align-left"></i>
                     </div>
                     <div class="edit d-flex align-items-center justify-content-center" (click)="editPage(item.itemID)" title="Edit">
                         <i class="far fa-edit"></i>

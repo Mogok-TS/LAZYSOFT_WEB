@@ -24,29 +24,3 @@
 .input-group:focus-within *:focus {
   outline: 0;
 }
-
-.warn-message{
-        float: right;
-        background-color: #ffa6008c;
-        line-height: 2;
-        padding: 10px;
-        text-align: center;
-        right:0;
-        position:fixed;
-        z-index: 1000;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        animation: fadeIn 0.3s ease-in both;
-    }
-
-.success-message{
-        float: right;
-        background-color: #1bff008c;
-        line-height: 2;
-        padding: 10px;
-        text-align: center;
-        right:0;
-        position:fixed;
-        z-index: 1000;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        animation: fadeIn 0.3s ease-in both;
-    }

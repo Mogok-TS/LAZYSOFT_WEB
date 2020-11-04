@@ -13,11 +13,13 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // check token available or not, if not "Log out" immediately
     if(sessionStorage.getItem("token") == null || sessionStorage.getItem("token") == ''){
       this.router.navigate(['/login']);
     }
   }
   
+  // logout function
   logout():void{
     sessionStorage.clear();
     this.router.navigate(['/login']);
