@@ -7,7 +7,34 @@ tr{
 }
 .table-tr{
     height: 40px;
+    margin-bottom: 15px;
 }
 .row{
     margin-left: 0;
+}
+
+
+.title{
+    font-weight: bold;
+}
+.details{
+    width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+    td{
+        display: block;
+    }
+    tr{
+        border-bottom: 1px solid whitesmoke;
+        margin-bottom: 5px;
+    }
+}
+table{
+    line-height: 2;
+}
+
+.col-md-6{
+    padding-left: 0;
+    padding-right: 0;
 }

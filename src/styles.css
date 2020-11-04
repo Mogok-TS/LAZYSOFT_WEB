@@ -18,6 +18,12 @@ body{
   height: 30px;
 }
 
+h4{
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-shadow: 1px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
 @media only screen and (max-width: 1024px) {
     .pageview{
       padding: 30px;
@@ -69,6 +75,10 @@ body{
   border-radius: 0;
 }
 
+.custom-select:focus{
+  box-shadow: none;
+}
+
 .btn-select {
   overflow: hidden;
   color: black;
@@ -116,14 +126,15 @@ body{
 
 .redirect-btn{
   cursor: pointer;
-  text-decoration: underline;
+  font-weight: bold;
   font-size: inherit;
 }
 
 /* ----------Testing ------------- */
 .input-group:focus-within {
-  border-color: #497b9c;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(100, 123, 255, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 
+  0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
 }
 .input-group:focus-within *:focus {
   outline: 0;
@@ -135,12 +146,12 @@ body{
   box-shadow: none !important;
 }
 
-input:focus, textarea:focus, select:focus{
-        outline: none;
+
+.focus{
+    color: black;
 }
 
-.form-control:focus + .input-group-prepend {
-    color: #4183D7;
+.focusout{
+    color: #9999d0;
 }
-
 

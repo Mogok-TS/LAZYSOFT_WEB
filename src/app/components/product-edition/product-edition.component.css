@@ -11,6 +11,20 @@
     }
 }
 
+.btn, .form-control, .custom-select{
+    background-color: whitesmoke;
+    border: none;
+}
+
+.input-group-text {
+    background-color: whitesmoke;
+    border: none;
+}
+
+.input-group:focus-within *:focus {
+  outline: 0;
+}
+
 .warn-message{
         border: 1px solid orange;
         float: right;

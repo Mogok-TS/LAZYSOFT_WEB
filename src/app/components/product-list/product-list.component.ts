@@ -31,6 +31,8 @@ export class ProductListComponent implements OnInit {
   warehouse: any;
   noData = false;
   p: number = 1;
+  showPagination = false;
+  searchFocus = false;
 
 
   ngOnInit(): void {
@@ -78,6 +80,12 @@ export class ProductListComponent implements OnInit {
         else{
           this.noData = true;
         }
+        if (this.displayList.length > 12) {
+          this.showPagination = true;
+        }
+        else {
+          this.showPagination = false;
+        }
       },
       error => {
         console.log(error);
@@ -124,6 +132,12 @@ export class ProductListComponent implements OnInit {
     else{
       this.noData = true;
     }
+    if (this.displayList.length > 12) {
+      this.showPagination = true;
+    }
+    else {
+      this.showPagination = false;
+    }
   }
 
   confirmBox(id) {
@@ -140,6 +154,14 @@ export class ProductListComponent implements OnInit {
         this.deleteItem(id);
       }
     })
+  }
+
+  focusSearch(){
+    this.searchFocus = true;
+  }
+
+  focusoutSearch(){
+    this.searchFocus = false;
   }
 
 }

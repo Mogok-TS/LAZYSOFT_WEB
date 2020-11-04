@@ -4,6 +4,10 @@
     height: 60px;
 }
 
+.nav-link{
+    padding: 0;
+}
+
 .router-outlet{
     width: 100%;
     margin-top: 60px;

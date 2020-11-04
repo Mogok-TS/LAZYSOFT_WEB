@@ -24,9 +24,11 @@
 .title {
     font-family: "Segoe";
     font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 3px;
     color: rgb(43, 43, 43);
-    margin-bottom: 5px;
-    text-align: center;
+    margin-bottom: 20px;
+    text-align: left;
     text-shadow: 2px 2px 3px #635b5b8f;
 }
 
@@ -34,6 +36,11 @@
     background-color: white;
     line-height: 2;
 }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
 
 .bg{
     background-color: whitesmoke;
@@ -106,10 +113,8 @@
     background-color: white;
 }
 
-.focus{
-    color: black;
-}
-
-.focusout{
-    color: #9999d0;
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
 }

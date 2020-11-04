@@ -6,35 +6,40 @@
         &nbsp;&nbsp;&nbsp;
         <a>Product details</a>
     </div>
-    <div class = "details row col-12">
-        <div class = "col-md-6">
-            <table>
-                <tr class = "table-tr">
-                    <td class="table-left">Name</td>
-                    <td>{{productList.name}}</td>
-                </tr>
-                <tr class = "table-tr">
-                    <td>Stock Balance</td>
-                    <td>{{productList.stockBalance}}</td>
-                </tr>
-                <tr class = "table-tr">
-                    <td>Price</td>
-                    <td>{{productList.price}}&nbsp;&nbsp;Ks</td>
-                </tr>
-                <tr class = "table-tr">
-                    <td>Warehouse</td>
-                    <td>{{productList.warehouse}}</td>
-                </tr>
-                <tr>
-                    <td>description</td>
-                    <td>
-                        {{productList.description}}
-                    </td>
-                </tr>
-            </table>
+    <div class = "details">
+        <div class="col-12">
+            <h4>Product Details</h4>
         </div>
-        <div class = "col-md-6">
-            <img [src] = "imageUrl" width="100%" height="auto">
+        <div class = "row col-12">
+            <div class="col-md-6">
+                <table>
+                    <tr class="table-tr">
+                        <td class="table-left title">Name</td>
+                        <td>{{productList.name}}</td>
+                    </tr>
+                    <tr class="table-tr">
+                        <td class="title">Stock Balance</td>
+                        <td>{{productList.stockBalance}}</td>
+                    </tr>
+                    <tr class="table-tr">
+                        <td class="title">Price</td>
+                        <td>{{productList.price}}&nbsp;&nbsp;Ks</td>
+                    </tr>
+                    <tr class="table-tr">
+                        <td class="title">Warehouse</td>
+                        <td>{{productList.warehouse}}</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Description</td>
+                        <td>
+                            {{productList.description}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <img [src]="imageUrl" width="100%" height="auto">
+            </div>
         </div>
     </div>
 </div>

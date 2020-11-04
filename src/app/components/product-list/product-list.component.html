@@ -1,10 +1,22 @@
-<div class = "fix">
+<div class = "fix col-12">
     <div class="row col-12 toprow">
         <div class="pList_title col-md-6">
             <h4>Product List</h4>
         </div>
         <div class="col-md-6 searchbox">
-            <input type="text" class="searchTerm" placeholder="&#xf002; Search" [(ngModel)]="search" (ngModelChange)="searchBar()">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" *ngIf="searchFocus">
+                            <i class="fa fa-search focus"></i>
+                        </span>
+                        <span class="input-group-text" *ngIf="!searchFocus">
+                            <i class="fa fa-search focusout"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="searchTerm" placeholder="Search" [(ngModel)]="search" (ngModelChange)="searchBar()">
+                </div>
+            </div>
             <div class="addButton" (click)="addNewProduct()">
                 <i class="fa fa-plus" aria-hidden="divue"></i>
             </div>
@@ -76,6 +88,6 @@
                 </div>
             </div>
         </div>
-        <pagination-controls (pageChange)="p = $event" *ngIf = "!noData"></pagination-controls>
+        <pagination-controls (pageChange)="p = $event" *ngIf = "showPagination"></pagination-controls>
     </div>
 </div>
