@@ -62,7 +62,7 @@
                         <label for="warehouse">Warehouse</label>
                         <div class="input-group">
                             <select class="browser-default custom-select" name="warehouse" id="warehouse" formControlName="warehouse">
-                                <option [value]="w_house['id']" *ngFor="let w_house of warehouseList" [selected]="w_house.name == warehouse">
+                                <option [value]="w_house.id" *ngFor="let w_house of warehouseList" [selected]="w_house.name == warehouse">
                                     {{w_house.name}}
                                 </option>
                             </select>
@@ -95,8 +95,7 @@
                         <hr>
                     </div>
                     <div>
-                        <button class="btn submit">Submit &nbsp;&nbsp; <i
-                                class="fas fa-arrow-circle-right"></i></button>
+                        <button class="btn submit"><i class="fas fa-check"></i></button>
                     </div>
                 </div>
             </div>
