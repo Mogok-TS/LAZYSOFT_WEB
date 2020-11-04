@@ -66,6 +66,7 @@ export class ProductDetailComponent implements OnInit {
           this.productList.stockBalance = data.stock_balance;
           this.productList.description = data.description;
           this.imageUrl = `http://localhost:5000/${data.image_path}`;
+            console.log("---> " + data.image_path);
         },
         error => {
           console.log(error);

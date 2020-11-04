@@ -21,6 +21,7 @@
     "@angular/router": "~10.1.5",
     "crypto-js": "^4.0.0",
     "ngx-image-compressor": "^1.0.6",
+    "ngx-pagination": "^5.0.0",
     "ngx-spinner": "^10.0.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.8.1",

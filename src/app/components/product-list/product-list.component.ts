@@ -30,6 +30,7 @@ export class ProductListComponent implements OnInit {
   searchData : any;
   warehouse: any;
   noData = false;
+  p: number = 1;
 
 
   ngOnInit(): void {
@@ -86,7 +87,7 @@ export class ProductListComponent implements OnInit {
 
   deleteItem(id): void{
     const data = {
-      id : id,
+      itemID : id,
       type: "DELETE",
     }
     this.productService.deleteProductItem(data, this.headers)

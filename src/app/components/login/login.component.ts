@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   }
   encPassword = "k#yF0^#nc^ypt?0#"
   test: any;
+  emailFocus = false;
+  passwordFocus = false;
 
 
   ngOnInit(): void {
@@ -80,6 +82,20 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.message = false;
     }, 4000);
+  }
+
+  focusEmail(): void{
+    this.emailFocus = true;
+  }
+  focusoutEmail(): void{
+    this.emailFocus = false;
+  }
+
+  focusPassword(): void {
+    this.passwordFocus = true;
+  }
+  focusoutPassword(): void {
+    this.passwordFocus = false;
   }
 
 }

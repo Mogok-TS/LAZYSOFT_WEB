@@ -13,18 +13,29 @@
                         <div class="form-group">
                             <div class = "input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                    <span class="input-group-text" *ngIf = "!emailFocus">
+                                        <i class="far fa-envelope focusout"></i>
+                                    </span>
+                                    <span class="input-group-text" *ngIf = "emailFocus">
+                                        <i class="far fa-envelope focus"></i>
+                                    </span>
                                 </div>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" formControlName="email" />
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email" formControlName="email" (focus) = "focusEmail()" (focusout) = "focusoutEmail()"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <div
+                                 class="input-group-prepend">
+                                    <span class="input-group-text" *ngIf ="!passwordFocus">
+                                        <i class="fas fa-lock focusout"></i>
+                                    </span>
+                                    <span class="input-group-text" *ngIf = "passwordFocus">
+                                        <i class="fas fa-lock focus"></i>
+                                    </span>
                                 </div>
                                 <input type="password" class="form-control" id="password" placeholder="Password"
-                                    name="password" formControlName="password"/>
+                                    name="password" formControlName="password" (focus) = "focusPassword()" (focusout) = "focusoutPassword()"/>
                             </div>
                         </div>
                         <div>

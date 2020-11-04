@@ -13,10 +13,11 @@
 }
 
 .btn{
-width: 100%;
-border-radius: 0;
-line-height: 2;
-background-color: #9999d0;
+    width: 100%;
+    border-radius: 0;
+    line-height: 2;
+    background-color: #9999d0;
+    color: white;
 }
 
 
@@ -90,7 +91,8 @@ background-color: #9999d0;
 .input-group-text{
     width: 50px;
     padding-left: 15px;
-    background-color: whitesmoke;
+    background-color: white;
+    border: none;
 }
 
 .form-control:focus{
@@ -100,6 +102,14 @@ background-color: #9999d0;
 }
 
 .input-group>.custom-select:not(:first-child), .input-group>.form-control:not(:first-child) {
-    border-left: none;
-    background-color: whitesmoke;
+    border: none;
+    background-color: white;
+}
+
+.focus{
+    color: black;
+}
+
+.focusout{
+    color: #9999d0;
 }

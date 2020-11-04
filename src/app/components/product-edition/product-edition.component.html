@@ -27,38 +27,34 @@
         <form (ngSubmit)="submit()" [formGroup]="form">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" formControlName="name"/>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="stock_balance">Stock Balance</label>
-                            <input type="text" class="form-control" id="stock_balance" name="stock_balance"
-                                formControlName="stock_balance" (ngModelChange)="validateStockBalance()" />
-                            <a *ngIf="!stockValidate"><small class="required">*Numbers only!</small></a>
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" formControlName="name"/>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="price">Price</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="price" name="price" formControlName="price"
-                                    (ngModelChange)="validatePrice()">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">Ks</span>
-                                </div>
+                    <div class="form-group">
+                        <label for="stock_balance">Stock Balance</label>
+                        <input type="text" class="form-control" id="stock_balance" name="stock_balance"
+                            formControlName="stock_balance" (ngModelChange)="validateStockBalance()" />
+                        <a *ngIf="!stockValidate"><small class="required">*Numbers only!</small></a>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="price" name="price" formControlName="price"
+                                (ngModelChange)="validatePrice()">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Ks</span>
                             </div>
-                            <div *ngIf="!priceValidate"><small class="required">*Numbers only!</small></div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="warehouse">Warehouse</label>
-                            <select class="browser-default custom-select" name="warehouse" id="warehouse"
-                                formControlName="warehouse">
-                                <option [value]="w_house['id']" *ngFor="let w_house of warehouseList" [selected]="w_house.name == warehouse">{{w_house.name}}
-                                </option>
-                            </select>
-                        </div>
+                        <div *ngIf="!priceValidate"><small class="required">*Numbers only!</small></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="warehouse">Warehouse</label>
+                        <select class="browser-default custom-select" name="warehouse" id="warehouse"
+                            formControlName="warehouse">
+                            <option [value]="w_house['id']" *ngFor="let w_house of warehouseList" [selected]="w_house.name == warehouse">{{w_house.name}}
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>

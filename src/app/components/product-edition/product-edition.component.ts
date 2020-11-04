@@ -31,6 +31,7 @@ export class ProductEditionComponent implements OnInit {
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.itemID = this.route.snapshot.paramMap.get('id');
+    console.log("this is item id ---> " + this.itemID);
     this.headers = new HttpHeaders()
       .set('token', this.token);
     this.getProductItem();

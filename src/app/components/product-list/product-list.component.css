@@ -1,3 +1,6 @@
+.pageview{
+  padding-top: 90px;
+}
 .img-container{
     width: 100%;
     height: 200px;
@@ -8,6 +11,16 @@
     font-size: small;
     margin-top: 10px;
     margin-bottom: 10px;
+    line-height: 2;
+}
+
+.fix{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: whitesmoke;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .pList_title{
@@ -18,6 +31,7 @@
     box-shadow: 0 4px 10px -5px;
     position: relative;
     background-color: white;
+    padding : 18px;
 }
 
 .product:hover{
@@ -34,7 +48,6 @@
     .product{
         width: 23%;
         margin: 10px;
-        padding : 10px;
     }
 }
 
@@ -48,7 +61,6 @@
     .product{
         width: 30.5%;
         margin: 10px;
-        padding : 10px;
     }
 }
 
@@ -62,7 +74,6 @@
     .product{
         width: 47%;
         margin: 10px;
-        padding : 10px;
     }
 }
 
@@ -76,7 +87,6 @@
     .product{
         width: 100%;
         margin: 10px;
-        padding : 10px;
     }
 }
 
@@ -121,7 +131,7 @@
 img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 
@@ -151,13 +161,25 @@ img {
 }
 
 .delete:hover{
-  border: 1px solid #00000038;
+  color: white;
+  background-color: #e88282;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 
+  0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
 }
 .edit:hover{
-  border: 1px solid #00000038;
+  color: white;
+  background-color: #9999d0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 
+  0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
 }
 .detail:hover{
-  border: 1px solid #00000038;
+  color: white;
+  background-color: #7ac767;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 
+  0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
 }
 
 .message{
@@ -186,8 +208,6 @@ img {
   border-radius: 0;
 }
 
-
-.swal2-confirm {
-  border-radius: 0;
-  font-size: 10px;
+.toprow{
+  margin-left: 0;
 }

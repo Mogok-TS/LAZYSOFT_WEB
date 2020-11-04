@@ -139,4 +139,8 @@ input:focus, textarea:focus, select:focus{
         outline: none;
 }
 
+.form-control:focus + .input-group-prepend {
+    color: #4183D7;
+}
+
 

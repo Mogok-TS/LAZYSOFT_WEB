@@ -1,25 +1,52 @@
-<div class= "col-12 pageview">
-    <div>
-        <div class = "row">
-            <div class="pList_title col-md-6">
-                <h4>Product List</h4>
-            </div>
-            <div class="col-md-6 searchbox">
-                <input type="text" class="searchTerm" placeholder="Search" [(ngModel)]="search" (ngModelChange)="searchBar()">
-                <div class="searchButton">
-                    <i class="fa fa-search"></i>
-                </div>
-                <div class = "addButton" (click) = "addNewProduct()">
-                    <i class="fa fa-plus" aria-hidden="divue"></i>
-                </div>
+<div class = "fix">
+    <div class="row col-12 toprow">
+        <div class="pList_title col-md-6">
+            <h4>Product List</h4>
+        </div>
+        <div class="col-md-6 searchbox">
+            <input type="text" class="searchTerm" placeholder="&#xf002; Search" [(ngModel)]="search" (ngModelChange)="searchBar()">
+            <div class="addButton" (click)="addNewProduct()">
+                <i class="fa fa-plus" aria-hidden="divue"></i>
             </div>
         </div>
-        <hr>
+    </div>
+</div>
+<div class= "col-12 pageview">
+    <div>
         <div class = "row"> 
             <div class = "message" *ngIf = "noData">
                 No product found!
             </div>
-            <div *ngFor="let item of displayList;" class="product">
+            <div *ngFor="let item of displayList | paginate: { itemsPerPage: 12, currentPage: p }" class="product">
+                <div class="img-container">
+                    <img src="http://localhost:5000/{{item.image_path}}">
+                </div>
+                <div class="list-table">
+                    <div class="name">
+                        {{item.name}}
+                    </div>
+                    <div class="text">
+                        {{item.price}}&nbsp;&nbsp;Ks
+                    </div>
+                    <div class="text">
+                        {{item.warehouse}}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="detail d-flex align-items-center justify-content-center" (click)="productDetail(item.itemID)"
+                        title="Details">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <div class="edit d-flex align-items-center justify-content-center" (click)="editPage(item.itemID)" title="Edit">
+                        <i class="far fa-edit"></i>
+                    </div>
+                    <div class="delete d-flex align-items-center justify-content-center" (click)="confirmBox(item.itemID)"
+                        title="Delete">
+                        <i class="far fa-trash-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let item of displayList | paginate: { itemsPerPage: 4, currentPage: p }" class="product">
                 <div class="img-container">
                     <img src="http://localhost:5000/{{item.image_path}}">
                 </div>
@@ -35,19 +62,20 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <div class="detail d-flex align-items-center justify-content-center" (click)="productDetail(item.autoID)"
+                    <div class="detail d-flex align-items-center justify-content-center" (click)="productDetail(item.itemID)"
                         title="Details">
                         <i class="fas fa-bars"></i>
                     </div>
                     <div class="edit d-flex align-items-center justify-content-center" (click)="editPage(item.itemID)" title="Edit">
                         <i class="far fa-edit"></i>
                     </div>
-                    <div class="delete d-flex align-items-center justify-content-center" (click)="confirmBox(item.autoID)"
+                    <div class="delete d-flex align-items-center justify-content-center" (click)="confirmBox(item.itemID)"
                         title="Delete">
                         <i class="far fa-trash-alt"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <pagination-controls (pageChange)="p = $event" *ngIf = "!noData"></pagination-controls>
     </div>
 </div>
