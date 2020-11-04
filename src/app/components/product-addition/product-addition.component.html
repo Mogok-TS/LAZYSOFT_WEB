@@ -4,11 +4,17 @@
 <div *ngIf="warnMessage">
     <div class="warn-message">
         <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;{{messageText}}
+        <div class="close">
+            <i class="fa fa-close" (click)="closeMessage()"></i>
+        </div>
     </div>
 </div>
 <div *ngIf="successMessage">
     <div class="success-message">
         <i class="far fa-check-circle"></i>&nbsp;&nbsp;{{messageText}}
+        <div class="close">
+            <i class="fa fa-close" (click)="closeMessage()"></i>
+        </div>
     </div>
 </div>
 <div class="col-12 pageview">

@@ -65,29 +65,32 @@
 }
 
 .message{
-    border: 1px solid orange;
+    color: #0000008a;
     background-color: #ffa5004a;
     line-height: 2;
     padding: 10px;
     text-align: center;
     margin-top: 10px;
-    position: absolute;
-    z-index: 1000;
     right: 0;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation: fadeIn 0.3s ease-in both;
 }
-
 
 @media only screen and (max-width: 767px) {
     .message{
         width: 100%;
         top: 0;
         margin-top: 0;
+        right: 1%;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .message{
-        width: 350px;
+        width: 300px;
+        right: 1%;
     }
 }
 

@@ -16,6 +16,7 @@ tr{
 
 .title{
     font-weight: bold;
+    color: gray;
 }
 .details{
     width: 100%;

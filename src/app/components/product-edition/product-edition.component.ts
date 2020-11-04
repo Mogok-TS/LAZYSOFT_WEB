@@ -133,17 +133,21 @@ export class ProductEditionComponent implements OnInit {
       this.warnMessage = true;
       this.successMessage = false;
       this.messageText = text;
-      setTimeout(() => {
-        this.warnMessage = false;
-      }, 4000);
+      if(this.warnMessage = true){
+        setTimeout(() => {
+          this.warnMessage = false;
+        }, 4000);
+      }
     }
     else {
       this.successMessage = true;
       this.warnMessage = false;
       this.messageText = text;
-      setTimeout(() => {
-        this.successMessage = false;
-      }, 4000);
+      if(this.successMessage = true){
+        setTimeout(() => {
+          this.successMessage = false;
+        }, 4000);
+      }
     }
   }
 
@@ -226,6 +230,11 @@ export class ProductEditionComponent implements OnInit {
 
   redirectHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  closeMessage() {
+    this.warnMessage = false;
+    this.successMessage = false;
   }
 
 }

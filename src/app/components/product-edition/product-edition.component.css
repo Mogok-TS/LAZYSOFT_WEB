@@ -26,7 +26,6 @@
 }
 
 .warn-message{
-        border: 1px solid orange;
         float: right;
         background-color: #ffa6008c;
         line-height: 2;
@@ -35,10 +34,11 @@
         right:0;
         position:fixed;
         z-index: 1000;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        animation: fadeIn 0.3s ease-in both;
     }
 
 .success-message{
-        border: 1px solid green;
         float: right;
         background-color: #1bff008c;
         line-height: 2;
@@ -47,4 +47,6 @@
         right:0;
         position:fixed;
         z-index: 1000;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        animation: fadeIn 0.3s ease-in both;
     }

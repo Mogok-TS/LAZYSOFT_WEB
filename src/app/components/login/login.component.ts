@@ -79,9 +79,11 @@ export class LoginComponent implements OnInit {
   showMessage(text){
     this.message = true;
     this.messageText = text;
-    setTimeout(() => {
-      this.message = false;
-    }, 4000);
+    if(this.message = true){
+      setTimeout(() => {
+        this.message = false;
+      }, 4000);
+    }
   }
 
   focusEmail(): void{
@@ -96,6 +98,11 @@ export class LoginComponent implements OnInit {
   }
   focusoutPassword(): void {
     this.passwordFocus = false;
+  }
+
+
+  closeMessage(){
+    this.message = false;
   }
 
 }

@@ -51,6 +51,9 @@
 <div *ngIf = "message">
     <div class = "message">
         <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;{{messageText}}
+        <div class = "close">
+            <i class="fa fa-close" (click) = "closeMessage()"></i>
+        </div>
     </div>
 </div>
 

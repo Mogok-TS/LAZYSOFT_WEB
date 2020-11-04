@@ -4,11 +4,17 @@
 <div *ngIf="warnMessage">
     <div class="warn-message">
         <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;{{messageText}}
+        <div class="close">
+            <i class="fa fa-close" (click)="closeMessage()"></i>
+        </div>
     </div>
 </div>
 <div *ngIf="successMessage">
     <div class="success-message">
         <i class="far fa-check-circle"></i>&nbsp;&nbsp;{{messageText}}
+        <div class="close">
+            <i class="fa fa-close" (click)="closeMessage()"></i>
+        </div>
     </div>
 </div>
 <div class="col-12 pageview" id="pageview">
@@ -72,7 +78,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="image">Thumbnail</label>
+                        <label for="image">Image</label>
                         <div class="form-group center">
                             <input type="file" name="file" id="file" class="input-file" (change)="onImagePicked($event)"
                                 accept="image/jpeg, image/jpg, image/png">
