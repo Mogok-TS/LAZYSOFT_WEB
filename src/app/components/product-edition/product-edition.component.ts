@@ -27,7 +27,8 @@ export class ProductEditionComponent implements OnInit {
   ngOnInit(): void {
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
-    this.itemID = this.route.snapshot.paramMap.get('id');
+    this.encryptedItemId = '' + this.route.snapshot.paramMap.get('id');
+    this.itemID = this.encryptService.decrypt(this.encryptedItemId.replace(new RegExp('###', 'g'), "/"));
 
     //set token to http headers
     this.headers = new HttpHeaders()
@@ -52,6 +53,7 @@ export class ProductEditionComponent implements OnInit {
   
   warehouseList: any;
   encryptedToken : any;
+  encryptedItemId: any;
   token : any;
   headers: any;
   form : FormGroup;
@@ -64,12 +66,14 @@ export class ProductEditionComponent implements OnInit {
   messageText = '';
   itemID: any;
   oldImage: any;
+  product: any;
 
   name: any;
   stock_balance: any;
   price: any;
   warehouse: any;
   description: any;
+  status: any;
 
 
   //Get warehouse list
@@ -81,7 +85,6 @@ export class ProductEditionComponent implements OnInit {
       .subscribe(
         data => {
           this.warehouseList = data['data'];
-          console.log(this.warehouse);
         },
         error => {
           console.log(error);
@@ -100,6 +103,7 @@ export class ProductEditionComponent implements OnInit {
     this.productService.getProductItem(data, this.headers)
     .subscribe(
       data => {
+        this.product = data.warehouse;
         this.name = data.name;
         this.stock_balance = data.stock_balance;
         this.price = data.price;
@@ -204,6 +208,15 @@ export class ProductEditionComponent implements OnInit {
       if (this.imageObj.size > 1048576) {
         this.imageObj = await this.compressImage(this.imageObj);
       }
+
+      // to check if the product already exist in database or not
+      if(this.form.value.name == this.name && this.form.value.warehouse == this.product.warehouse){
+        this.status = '1';
+      }
+      else{
+        this.status = '2';
+      }
+
       const form = new FormData();
       form.append('itemID', this.itemID);
       form.append('image', this.imageObj);
@@ -213,6 +226,7 @@ export class ProductEditionComponent implements OnInit {
       form.append('warehouse', this.form.value.warehouse);
       form.append('description', this.form.value.description);
       form.append('imageName', this.oldImage)
+      form.append('status', this.status);
       form.append('type', 'UPDATE');
 
       // update data of product details through api
@@ -231,6 +245,14 @@ export class ProductEditionComponent implements OnInit {
 
     //user did not select an image to update
     else if(this.imageObj == null){
+
+      if (this.form.value.name == this.name && this.form.value.warehouse == this.product.warehouse) {
+        this.status = '1';
+      }
+      else {
+        this.status = '2';
+      }
+
       this.spinner.show();
       const form = new FormData();
       form.append('itemID', this.itemID);
@@ -240,6 +262,7 @@ export class ProductEditionComponent implements OnInit {
       form.append('warehouse', this.form.value.warehouse);
       form.append('description', this.form.value.description);
       form.append('imageName', this.oldImage)
+      form.append('status', this.status);
       form.append('type', 'UPDATE');
 
       // update data of product details through api
@@ -251,7 +274,12 @@ export class ProductEditionComponent implements OnInit {
           },
           error => {
             this.spinner.hide();
-            console.log(error);
+            if (error.status == 403) {
+              this.showMessage("warn", "This product already exists in this warehouse!");
+            }
+            else{
+              this.showMessage("warn", "Internal Server Error!");
+            }
           }
         )
     }

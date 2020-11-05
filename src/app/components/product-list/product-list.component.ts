@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private router: Router,
     private encryptService: EncryptService,
-    private productService: ProductService,
+    public productService: ProductService,
     private route: ActivatedRoute,
   ) { }
 
@@ -36,7 +36,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.encryptedToken = '' + sessionStorage.getItem("token");
     this.token = this.encryptService.decrypt(this.encryptedToken);
-    console.log("--->>" + this.token);
     this.headers = new HttpHeaders()
       .set('token', this.token);
 
@@ -51,12 +50,14 @@ export class ProductListComponent implements OnInit {
 
   //redirect user to product edition page
   editPage(id): void {
-    this.router.navigate([`/home/product-edition/${id}`]);
+    var encryptedId = this.encryptService.encrypt(id.toString());
+    this.router.navigate([`/home/product-edition/${encryptedId.replace(new RegExp('/', 'g'), "###")}`]);
   }
 
   //redirect user to product detail page
   productDetail(id): void{
-    this.router.navigate([`/home/product-detail/${id}`]);
+    var encryptedId = this.encryptService.encrypt(id.toString());
+    this.router.navigate([`/home/product-detail/${encryptedId.replace(new RegExp('/', 'g'), "###")}`]);
   }
 
 

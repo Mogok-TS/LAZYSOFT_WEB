@@ -21,7 +21,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.encryptedToken = sessionStorage.getItem("token") + '';
     this.token = this.encryptService.decrypt(this.encryptedToken);
-    this.itemID = this.route.snapshot.paramMap.get('id');
+    this.itemID = this.encryptService.decrypt("" + this.route.snapshot.paramMap.get('id').replace(new RegExp('###', 'g'), "/"));
 
     //set token to http header
     this.headers = new HttpHeaders()

@@ -20,7 +20,7 @@ export class MainPageComponent implements OnInit {
   }
   
   // logout function
-  logout():void{
+  logout(){
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }

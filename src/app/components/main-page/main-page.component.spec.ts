@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MainPageComponent } from './main-page.component';
 
@@ -13,7 +14,10 @@ describe('MainPageComponent', () => {
     }
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [ MainPageComponent ]
+      declarations: [ MainPageComponent ],
+      providers: [
+        { provide: Router, useValue: routerStub }
+      ]
     })
     .compileComponents();
   });
@@ -30,7 +34,9 @@ describe('MainPageComponent', () => {
 
   describe("Log out testing", function () {
     it("log out should navigate to Log in page", function () {
+      fixture.detectChanges();
       component.logout();
+      expect(component.logout).toHaveBeenCalled;
       expect(routerStub.navigate).toHaveBeenCalledWith(['/login']);
     });
   });

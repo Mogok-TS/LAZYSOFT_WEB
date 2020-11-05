@@ -9,8 +9,6 @@ export class EncryptService {
   constructor() { }
 
   secretKey = "MySecretKeyForEncryption&Descryption";
-  salt = CryptoJS.lib.WordArray.random(128 / 8);
-  iv = CryptoJS.lib.WordArray.random(128 / 8);
 
 
   // for encryption 

@@ -37,9 +37,10 @@ h4{
 
 .close{
     font-size: small;
-    float: right;
-    padding-right: 10px;
     color: white;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 @media only screen and (max-width: 1024px) {
     .pageview{
