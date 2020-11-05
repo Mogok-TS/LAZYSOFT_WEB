@@ -14,26 +14,27 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productService: ProductService,
+    public productService: ProductService,
     private encryptService : EncryptService,
   ) { }
 
   ngOnInit(): void {
     this.encryptedToken = sessionStorage.getItem("token") + '';
     this.token = this.encryptService.decrypt(this.encryptedToken);
-    this.itemID = this.encryptService.decrypt("" + this.route.snapshot.paramMap.get('id').replace(new RegExp('###', 'g'), "/"));
+    this.encryptedItemId = "" + this.route.snapshot.paramMap.get('id');
+    this.itemID = this.encryptService.decrypt(this.encryptedItemId.replace(new RegExp('###', 'g'), "/"));
 
     //set token to http header
     this.headers = new HttpHeaders()
       .set('token', this.token);
 
     this.getWarehouseList();
-    this.getProductItem();
   }
 
   itemID: any;
   warehouseList: any;
   encryptedToken: any;
+  encryptedItemId: any;
   token: any;
   headers: any;
   imageUrl: any;
@@ -59,6 +60,7 @@ export class ProductDetailComponent implements OnInit {
       .subscribe(
         data => {
           this.warehouseList = data['data'];
+          this.getProductItem();
         },
         error => {
           console.log(error);

@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class ProductAdditionComponent implements OnInit {
 
   constructor(
-    private productService: ProductService,
+    public productService: ProductService,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private encryptService: EncryptService,

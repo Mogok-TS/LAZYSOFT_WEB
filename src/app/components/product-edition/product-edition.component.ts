@@ -17,7 +17,7 @@ export class ProductEditionComponent implements OnInit {
   constructor(
     private encryptService: EncryptService,
     private router: Router,
-    private productService: ProductService,
+    public productService: ProductService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
@@ -34,7 +34,6 @@ export class ProductEditionComponent implements OnInit {
     this.headers = new HttpHeaders()
       .set('token', this.token);
     this.getWarehouseList();
-    this.getProductItem();
 
     //form validation
     this.form = this.fb.group({
@@ -85,6 +84,7 @@ export class ProductEditionComponent implements OnInit {
       .subscribe(
         data => {
           this.warehouseList = data['data'];
+          this.getProductItem();
         },
         error => {
           console.log(error);

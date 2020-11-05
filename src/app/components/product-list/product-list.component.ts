@@ -40,7 +40,6 @@ export class ProductListComponent implements OnInit {
       .set('token', this.token);
 
     this.getWarehouseList();
-    this.getProductItemList();
   }
 
   // redirect user to new product addition page
@@ -71,6 +70,7 @@ export class ProductListComponent implements OnInit {
       .subscribe(
         data => {
           this.warehouse = data['data'];
+          this.getProductItemList();
         },
         error => {
           console.log(error);

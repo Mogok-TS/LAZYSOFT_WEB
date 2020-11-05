@@ -67,6 +67,18 @@ describe('LoginComponent', () => {
   });
 
   describe("Log in testing", function () {
+
+    it('sign in button click should trigger the login() function', function () {
+      spyOn(component, 'login');
+
+      let button = fixture.debugElement.nativeElement.querySelector('button');
+      button.click();
+
+      fixture.whenStable().then(() => {
+        expect(component.login).toHaveBeenCalled();
+      });
+    });
+
     it("form input are invalid", function () {
       const spy = spyOn(component, "showMessage");
       expect(component.form.valid).toBe(false);
@@ -88,7 +100,6 @@ describe('LoginComponent', () => {
       expect(component.productService.login).toHaveBeenCalledWith(user);
     });
 
-
     it('user is valid and redirect to home page', function() {
       const spy = spyOn(component.productService, "login").and.returnValues(of({'status' : true}));
       const user = {
@@ -102,6 +113,7 @@ describe('LoginComponent', () => {
         component.homePage();
         expect(routerStub.navigate).toHaveBeenCalledWith(['/home']);
       });
+      expect(component.productService.login).toHaveBeenCalledWith(user);
     })
 
     it('user is not valid and show error messages', function () {
@@ -114,7 +126,7 @@ describe('LoginComponent', () => {
       component.productService.login(user).subscribe((response: Response) => {
         expect(response['status']).toBeFalse;
         component.showMessage("error message");
-        expect(component.showMessage).toHaveBeenCalledWith("error message");
+        expect(component.showMessage).toHaveBeenCalledTimes(1);
       });
     })
 
