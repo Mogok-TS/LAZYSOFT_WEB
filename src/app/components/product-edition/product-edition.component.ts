@@ -234,7 +234,7 @@ export class ProductEditionComponent implements OnInit {
         .subscribe(
           response => {
             this.spinner.hide();
-            this.router.navigate(['/home/product-list']);
+            this.redirectHome();
           },
           error => {
             this.spinner.hide();

@@ -118,6 +118,7 @@ describe('LoginComponent', () => {
 
     it('user is not valid and show error messages', function () {
       const spy = spyOn(component.productService, "login").and.returnValues(of({ 'status': false }));
+      spyOn(component , 'showMessage');
       const user = {
         email: 'test@test.com',
         password: '123456789',

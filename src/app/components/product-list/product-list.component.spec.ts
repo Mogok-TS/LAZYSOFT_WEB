@@ -39,13 +39,30 @@ describe('ProductListComponent', () => {
   });
 
 
-  // it('should navigate with a provided config',
-  //   (inject([Router, Location], (router: Router, location: Location) function() {
+  describe("routes to other pages such as Edit page, Detail page and Add Product page", function() {
+    it('should go to new product page', function () {
+      var router = TestBed.inject(Router);
+      spyOn(router, 'navigate');
+      component.addNewProduct();
+      expect(router.navigate).toHaveBeenCalledWith(['/home/product-addition']);
+    });
 
-  //     // router.navigateByUrl('/simple');
-  //     // expect(location.path()).toEqual('/simple');
-  //   }));
+    it('should go to product edition page', function () {
+      var router = TestBed.inject(Router);
+      const itemID = "123432"
+      spyOn(router, 'navigate');
+      component.editPage(itemID);
+      expect(router.navigate).toHaveBeenCalled();
+    });
 
+    it('should go to product Detials page', function () {
+      var router = TestBed.inject(Router);
+      const itemID = "123432"
+      spyOn(router, 'navigate');
+      component.productDetail(itemID);
+      expect(router.navigate).toHaveBeenCalled();
+    });
+  })
 
 
   describe("get warehouse list and product list as soon as home page appears", function () {

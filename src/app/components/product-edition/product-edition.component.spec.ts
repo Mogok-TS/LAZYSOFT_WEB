@@ -40,18 +40,28 @@ describe('ProductEditionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("submit function", function () {
+  describe("Edit data submit and home page navigation", function () {
     it("update to database and redirect to home page", function () {
       const spy = spyOn(component.productService, "updateProductItem").and.returnValues(of({ 'status': true }));
       const form = new FormData();
+      var router = TestBed.inject(Router);
+      spyOn(router, 'navigate');
       const token = "token";
       const headers = new HttpHeaders()
         .set('token', token);
       component.submit();
       component.productService.updateProductItem(form, headers).subscribe((response: Response) => {
         expect(response).not.toBe(null);
-        expect(response['status']).toBeTrue;
+        component.redirectHome();
+        expect(router.navigate).toHaveBeenCalledWith(['/home']);
       });
+    });
+
+    it('should go to home page', function () {
+      var router = TestBed.inject(Router);
+      spyOn(router, 'navigate');
+      component.redirectHome();
+      expect(router.navigate).toHaveBeenCalledWith(['/home']);
     });
   });
 
