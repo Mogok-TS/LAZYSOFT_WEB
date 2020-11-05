@@ -35,14 +35,4 @@ describe('ProductAdditionComponent', () => {
   it('form invalid when empty', () => {
     expect(component.form.valid).toBeFalsy();
   });
-
-  it('stock balance should be numbers only'), () => {
-    let stockBalance = component.form.controls['stock_balance'];
-    expect(stockBalance).toMatch("/^[-\s0-9၀-၉]*$/");
-  }
-
-  it('Price balance should be numbers only'), () => {
-    let stockBalance = component.form.controls['price'];
-    expect(stockBalance).toMatch("/^[-\s0-9၀-၉]*$/");
-  }
 });

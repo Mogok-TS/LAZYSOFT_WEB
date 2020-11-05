@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         response => {
           this.token = this.encryptService.encrypt(response["token"]);
           sessionStorage.setItem("token", this.token);
-          this.router.navigate([`/home`]);
+          this.homePage();
         },
 
         // User not exist or password wrong
@@ -79,6 +79,11 @@ export class LoginComponent implements OnInit {
         }
       )
     }
+  }
+
+  //let the user to go home page
+  homePage(): void{
+    this.router.navigate([`/home`]);
   }
 
   //show warning message box

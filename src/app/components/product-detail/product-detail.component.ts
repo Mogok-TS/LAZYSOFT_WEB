@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.encryptedToken = '' + sessionStorage.getItem("token");
+    this.encryptedToken = sessionStorage.getItem("token") + '';
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.itemID = this.route.snapshot.paramMap.get('id');
 
