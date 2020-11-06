@@ -68,17 +68,6 @@ describe('LoginComponent', () => {
 
   describe("Log in testing", function () {
 
-    it('sign in button click should trigger the login() function', function () {
-      spyOn(component, 'login');
-
-      let button = fixture.debugElement.nativeElement.querySelector('button');
-      button.click();
-
-      fixture.whenStable().then(() => {
-        expect(component.login).toHaveBeenCalled();
-      });
-    });
-
     it("form input are invalid", function () {
       const spy = spyOn(component, "showMessage");
       expect(component.form.valid).toBe(false);
