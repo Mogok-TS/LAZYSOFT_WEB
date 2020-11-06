@@ -88,15 +88,20 @@ export class ProductListComponent implements OnInit {
     .subscribe(
       data => {
         this.productList = data;
+        var i = 0;
         this.productList.forEach((item) => { 
+          this.productList[i].image_path = this.productService.getImageLink(item.image_path);
           for (let i = 0; i < this.warehouse.length; i++) {
             if (item.warehouse.toString() == this.warehouse[i]['id']) {
               item.warehouse = this.warehouse[i]['name'];
               console.log(item.warehouse);
             }
           };
+          i++;
         });
+
         this.displayList = this.productList;
+        console.log(this.displayList);
 
         if (this.productList.length % 12 == 0) {
           this.p = 1;

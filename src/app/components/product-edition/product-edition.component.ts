@@ -113,12 +113,11 @@ export class ProductEditionComponent implements OnInit {
           }
         }
         this.description = data.description;
-        this.imageUrl = `http://localhost:5000/${data.image_path}`;
+        this.imageUrl = this.productService.getImageLink(data.image_path);
         this.oldImage = data.image_name;
         this.form.patchValue({
           name : data.name,
           stock_balance : data.stock_balance,
-          price : data.price,
           warehouse : data.warehouse,
           description : data.description,
         });
