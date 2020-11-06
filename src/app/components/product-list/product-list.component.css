@@ -252,11 +252,6 @@ img {
   color: rgba(0, 0, 0, 0.589);
 }
 
-.swal2-popup {
-  font-size: .8rem !important;
-  background-color: whitesmoke;
-  border-radius: 0;
-}
 
 .toprow{
   margin-left: 0;
@@ -291,6 +286,10 @@ img {
    margin-right: auto;
 }
 
+.modal-body{
+  text-align: left;
+}
+
 
 .modal-btn-yes , .modal-btn-no{
   width: 100%;
@@ -312,7 +311,7 @@ img {
   border: none;
 }
 .modal-header{
-  background-color: #9999d0;
+  background-color: #e88282;
   border-radius: 0;
   color: white;
 }

@@ -42,7 +42,7 @@ describe('ProductAdditionComponent', () => {
   });
 
   describe("add function", function () {
-    it("upload to database and redirect to home page", function () {
+    it("upload to database", function () {
       const spy = spyOn(component.productService, "addNewProductItem").and.returnValues(of({ 'status': true }));
       const form = new FormData();
       const token = "token";

@@ -29,7 +29,7 @@
             <div class = "message" *ngIf = "noData">
                 No product found!
             </div>
-            <div *ngFor="let item of displayList | paginate: { itemsPerPage: 12, currentPage: p} ; let i = index" class="product">
+            <div *ngFor="let item of displayList | paginate: { itemsPerPage: 2, currentPage: p} ; let i = index" class="product">
                 <div class="img-container" (click)="productDetail(item.itemID)" title= "Details">
                     <img src="{{item.image_path}}">
                 </div>
