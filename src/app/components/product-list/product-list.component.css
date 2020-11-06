@@ -88,6 +88,10 @@
     .pageview{
       padding-top: 110px;
     }
+    .modal-content{
+      margin-top: 40%;
+      width: 100% !important;
+    }
 }
 
 @media only screen and (max-width: 426px){
@@ -102,6 +106,10 @@
     }
     .pageview{
       padding-top: 110px;
+    }
+    .modal-content{
+      margin-top: 40%;
+      width: 100% !important;
     }
 }
 
@@ -267,4 +275,37 @@ img {
 
 .pagination{
   justify-content: center;
+}
+
+.modal-content{
+  margin-top: 40%;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0;
+}
+
+
+.modal-btn-yes , .modal-btn-no{
+  width: 100%;
+  border-radius: 0;
+  background-color: #ccc;
+}
+
+.modal-btn-yes:hover{
+  color: white;
+  background-color: #9999d0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+}
+
+.modal-btn-no:hover{
+  color: white;
+  background-color: #e88282;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+}
+
+.fa-close:hover{
+  cursor: pointer;
 }

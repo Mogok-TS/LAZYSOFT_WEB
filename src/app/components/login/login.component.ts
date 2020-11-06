@@ -34,6 +34,12 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    // check token available or not, if yes , go to home page
+    if (sessionStorage.getItem("token") != null && sessionStorage.getItem("token") != '') {
+      this.router.navigate(['/home']);
+    }
+
     //Form validation check
     this.form = this.fb.group({
       email: ['', [

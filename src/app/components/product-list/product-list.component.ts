@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EncryptService } from 'src/app/encryption-service/encrypt.service';
 import { ProductService } from 'src/app/services/product.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +15,6 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private encryptService: EncryptService,
     public productService: ProductService,
-    private route: ActivatedRoute,
   ) { }
 
   token: any;
@@ -29,8 +27,8 @@ export class ProductListComponent implements OnInit {
   warehouse: any;
   noData = false;
   p: number = 1;
-  showPagination = false;
   searchFocus = false;
+  currentID : any;
 
 
   ngOnInit(): void {
@@ -40,6 +38,7 @@ export class ProductListComponent implements OnInit {
       .set('token', this.token);
 
     this.getWarehouseList();
+    console.log(this.p);
   }
 
   // redirect user to new product addition page
@@ -98,6 +97,10 @@ export class ProductListComponent implements OnInit {
           };
         });
         this.displayList = this.productList;
+
+        if (this.productList.length % 12 == 0) {
+          this.p = 1;
+        }
   
         //checking there is product data or not
         if(this.displayList.length > 0)
@@ -107,15 +110,6 @@ export class ProductListComponent implements OnInit {
         else{
           this.noData = true;
         }
-
-        //checking if the pagination control should display or not
-        if (this.displayList.length > 12) {
-          this.showPagination = true;
-        }
-        else {
-          this.showPagination = false;
-        }
-
       },
       error => {
         console.log(error);
@@ -134,7 +128,6 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProductItem(data, this.headers)
     .subscribe(
       response => {
-        console.log("Deleted successfully!");
         this.getProductItemList();
       },
       error =>{
@@ -168,31 +161,11 @@ export class ProductListComponent implements OnInit {
     else{
       this.noData = true;
     }
-
-    //checking if the pagination control should display or not
-    if (this.displayList.length > 12) {
-      this.showPagination = true;
-    }
-    else {
-      this.showPagination = false;
-    }
   }
 
   // confirmation box for deleting items
   confirmBox(id) {
-    Swal.fire({
-      width: 300,
-      text: 'Are you sure?',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: '<i class="fa fa-close"></i>',
-      confirmButtonText: '<i class="fa fa-check"></i>'
-    }).then((result) => {
-      if (result.value) {
-        this.deleteItem(id);
-      }
-    })
+    this.currentID = id;
   }
 
   // for search box input focus design
