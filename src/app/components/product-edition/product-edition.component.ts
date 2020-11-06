@@ -133,8 +133,13 @@ export class ProductEditionComponent implements OnInit {
   // store the image user selected
   onImagePicked(event: Event): void {
     const FILE = (event.target as HTMLInputElement).files[0];
-    this.preview(FILE);
-    this.imageObj = FILE;
+    if (FILE.type.toString() == "image/png" || FILE.type.toString() == "image/jpeg" || FILE.type.toString() == "image/jpg") {
+      this.preview(FILE);
+      this.imageObj = FILE;
+    }
+    else {
+      this.showMessage("warn", "Image type can only be accepted!")
+    }
   }
 
   // for previewing the image user has selected

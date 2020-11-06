@@ -113,7 +113,12 @@ export class ProductAdditionComponent implements OnInit {
         },
         error => {
           this.spinner.hide();
-          console.log(error);
+          if (error.status == 403) {
+            this.showMessage("warn", "This product already exists in this warehouse!");
+          }
+          else {
+            this.showMessage("warn", "Internal Server Error!");
+          }
         }
       )
     }
@@ -139,8 +144,13 @@ export class ProductAdditionComponent implements OnInit {
   // store the image that user selected
   onImagePicked(event: Event): void {
     const FILE = (event.target as HTMLInputElement).files[0];
-    this.preview(FILE);
-    this.imageObj = FILE;
+    if (FILE.type.toString() == "image/png" || FILE.type.toString() == "image/jpeg" || FILE.type.toString() == "image/jpg"){
+      this.preview(FILE);
+      this.imageObj = FILE;
+    }
+    else{
+      this.showMessage("warn", "Image type can only be accepted!")
+    }
   }
 
   // for previewing the selected image
