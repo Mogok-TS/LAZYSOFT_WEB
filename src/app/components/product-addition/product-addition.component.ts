@@ -80,6 +80,10 @@ export class ProductAdditionComponent implements OnInit {
       this.showMessage("warn", "Stock balance should be numbers only.");
     }
 
+    else if(this.validate() == true){
+      this.showMessage("warn", "No script text allowed");
+    }
+
     // check price is numbers only or not
     else if(this.priceValidate == false){
       this.showMessage("warn", "Price should be numbers only.");
@@ -182,6 +186,12 @@ export class ProductAdditionComponent implements OnInit {
   validatePrice(){
     const regularExpression = /^[-\s0-9၀-၉]*$/;
     this.priceValidate = regularExpression.test(String(this.form.value.price).toLowerCase());
+  }
+
+  //validate text area
+  validate(){
+    var re = /<(\"[^\"]*\"|'[^']*'|[^'\">])*>/;
+    return re.test(String(this.form.value.description).toLowerCase());
   }
 
   // show warning and success message boxes

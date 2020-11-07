@@ -157,6 +157,12 @@ export class ProductEditionComponent implements OnInit {
     this.stockValidate = regularExpression.test(String(this.form.value.stock_balance).toLowerCase());
   }
 
+  //validate text area
+  validate() {
+    var re = /<(\"[^\"]*\"|'[^']*'|[^'\">])*>/;
+    return re.test(String(this.form.value.description).toLowerCase());
+  }
+
   // for validating price to be number only
   validatePrice() {
     const regularExpression = /^[-\s0-9၀-၉]*$/;
@@ -203,6 +209,10 @@ export class ProductEditionComponent implements OnInit {
     // checking price is number only or not
     else if (this.priceValidate == false) {
       this.showMessage("warn", "Price should be numbers only.");
+    }
+
+    else if (this.validate() == true) {
+      this.showMessage("warn", "No script text allowed");
     }
 
     //  user has selected an image to update
@@ -308,6 +318,8 @@ export class ProductEditionComponent implements OnInit {
   redirectHome(): void {
     this.router.navigate(['/home']);
   }
+
+
 
   // close message box
   closeMessage() {
