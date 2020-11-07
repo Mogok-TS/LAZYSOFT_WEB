@@ -103,7 +103,7 @@ export class ProductEditionComponent implements OnInit {
     this.productService.getProductItem(data, this.headers)
     .subscribe(
       data => {
-        this.product = data.warehouse;
+        this.product = data;
         this.name = data.name;
         this.stock_balance = data.stock_balance;
         this.price = data.price;
@@ -118,6 +118,7 @@ export class ProductEditionComponent implements OnInit {
         this.form.patchValue({
           name : data.name,
           stock_balance : data.stock_balance,
+          price: data.price,
           warehouse : data.warehouse,
           description : data.description,
         });
@@ -214,7 +215,7 @@ export class ProductEditionComponent implements OnInit {
       }
 
       // to check if the product already exist in database or not
-      if(this.form.value.name == this.name && this.form.value.warehouse == this.product.warehouse){
+      if(this.form.value.name == this.name && this.form.value.warehouse == this.warehouse){
         this.status = '1';
       }
       else{
