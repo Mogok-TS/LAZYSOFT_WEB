@@ -1,3 +1,8 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
 /* Add custom fonts */
 @font-face {
   font-family: "Ubuntu";
@@ -162,6 +167,7 @@ h4{
   cursor: pointer;
   font-weight: bold;
   font-size: inherit;
+  text-decoration: underline;
 }
 
 /* ----------Testing ------------- */

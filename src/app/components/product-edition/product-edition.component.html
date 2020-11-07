@@ -42,7 +42,7 @@
                     <div class="form-group">
                         <label for="stock_balance">Stock Balance</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="stock_balance" name="stock_balance" formControlName="stock_balance"
+                            <input type="number" class="form-control" id="stock_balance" name="stock_balance" formControlName="stock_balance"
                                 (ngModelChange)="validateStockBalance()" />
                         </div>
                         <a *ngIf="!stockValidate"><small class="required">*Numbers only!</small></a>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label for="price">Price</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="price" name="price" formControlName="price"
+                            <input type="number" class="form-control" id="price" name="price" formControlName="price"
                                 (ngModelChange)="validatePrice()">
                             <div class="input-group-append">
                                 <span class="input-group-text">Ks</span>

@@ -61,6 +61,7 @@
         position: relative;
         display: flex;
         justify-content: flex-end;
+
     }
     .product{
         width: 30.5%;
@@ -80,6 +81,7 @@
         text-align: left;
         position: relative;
         display: flex;
+
     }
     .product{
         width: 47%;

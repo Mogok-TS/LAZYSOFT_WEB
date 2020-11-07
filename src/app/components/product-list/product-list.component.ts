@@ -28,6 +28,7 @@ export class ProductListComponent implements OnInit {
   noData = false;
   p: number = 1;
   searchFocus = false;
+  deleteName = '';
   currentID : any;
 
 
@@ -169,8 +170,9 @@ export class ProductListComponent implements OnInit {
   }
 
   // confirmation box for deleting items
-  confirmBox(id) {
-    this.currentID = id;
+  confirmBox(item) {
+    this.currentID = item.itemID;
+    this.deleteName = item.name
   }
 
   // for search box input focus design

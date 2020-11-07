@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="addButton d-flex align-items-center justify-content-center" (click)="addNewProduct()">
-                <i class="fa fa-plus" aria-hidden="divue"></i>
+                <i class="fa fa-plus" aria-hidden="true"></i>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
                     <div class="edit d-flex align-items-center justify-content-center" (click)="editPage(item.itemID)" title="Edit">
                         <i class="far fa-edit"></i>
                     </div>
-                    <div class="delete d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#imagemodal" (click) = confirmBox(item.itemID)
+                    <div class="delete d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#imagemodal" (click) = confirmBox(item)
                         title="Delete">
                         <i class="far fa-trash-alt"></i>
                     </div>
@@ -70,14 +70,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div>
-                    Message
+                    Delete
                 </div>
                 <div data-dismiss="modal">
                     <i class="fa fa-close"></i>
                 </div>
             </div>
             <div class="modal-body">
-                Are you sure?
+                {{deleteName}}?
             </div>
             <div class="modal-footer">
                 <button type="button" class="modal-btn-yes btn" data-dismiss="modal"
