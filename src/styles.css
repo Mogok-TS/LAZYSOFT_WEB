@@ -167,7 +167,6 @@ h4{
   cursor: pointer;
   font-weight: bold;
   font-size: inherit;
-  text-decoration: underline;
 }
 
 /* ----------Testing ------------- */
@@ -234,5 +233,12 @@ h4{
     animation: fadeIn 0.3s ease-in both;
 }
 
+.notFound{
+  position: absolute;
+  text-align: center;
+  font-size: xx-large;
+  top: 50%;
+  opacity: 50%;
+}
 
 

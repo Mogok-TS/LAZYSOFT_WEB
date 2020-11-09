@@ -66,6 +66,7 @@ export class ProductEditionComponent implements OnInit {
   itemID: any;
   oldImage: any;
   product: any;
+  productNotFound = false;
 
   name: any;
   stock_balance: any;
@@ -103,6 +104,11 @@ export class ProductEditionComponent implements OnInit {
     this.productService.getProductItem(data, this.headers)
     .subscribe(
       data => {
+
+        //check the product is available or not
+        if(data == null){
+          this.productNotFound = true;
+        }
         this.product = data;
         this.name = data.name;
         this.stock_balance = data.stock_balance;
@@ -125,7 +131,8 @@ export class ProductEditionComponent implements OnInit {
         this.stockValidate = true;
       },
       error => {
-        console.log(error);
+        //If the product is not found
+        this.productNotFound = true;
       }
     )
   }
@@ -211,10 +218,6 @@ export class ProductEditionComponent implements OnInit {
       this.showMessage("warn", "Price should be numbers only.");
     }
 
-    else if (this.validate() == true) {
-      this.showMessage("warn", "No script text allowed");
-    }
-
     //  user has selected an image to update
     else if(this.imageObj != null){
       this.spinner.show();
@@ -225,7 +228,7 @@ export class ProductEditionComponent implements OnInit {
       }
 
       // to check if the product already exist in database or not
-      if(this.form.value.name == this.name && this.form.value.warehouse == this.warehouse){
+      if(this.form.value.name == this.name && this.form.value.warehouse == this.product.warehouse){
         this.status = '1';
       }
       else{
@@ -261,6 +264,7 @@ export class ProductEditionComponent implements OnInit {
     //user did not select an image to update
     else if(this.imageObj == null){
 
+      // to check if the product already exist in database or not
       if (this.form.value.name == this.name && this.form.value.warehouse == this.product.warehouse) {
         this.status = '1';
       }
@@ -295,6 +299,7 @@ export class ProductEditionComponent implements OnInit {
             else{
               this.showMessage("warn", "Internal Server Error!");
             }
+            console.log(error);
           }
         )
     }

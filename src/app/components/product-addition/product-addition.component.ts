@@ -80,9 +80,9 @@ export class ProductAdditionComponent implements OnInit {
       this.showMessage("warn", "Stock balance should be numbers only.");
     }
 
-    else if(this.validate() == true){
-      this.showMessage("warn", "No script text allowed");
-    }
+    // else if(this.validate() == true){
+    //   this.showMessage("warn", "No script text allowed");
+    // }
 
     // check price is numbers only or not
     else if(this.priceValidate == false){

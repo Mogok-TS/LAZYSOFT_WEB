@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxImageCompressorModule } from 'ngx-image-compressor';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [

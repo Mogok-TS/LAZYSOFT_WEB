@@ -23,6 +23,7 @@ export class ProductDetailComponent implements OnInit {
     this.token = this.encryptService.decrypt(this.encryptedToken);
     this.encryptedItemId = "" + this.route.snapshot.paramMap.get('id');
     this.itemID = this.encryptService.decrypt(this.encryptedItemId.replace(new RegExp('###', 'g'), "/"));
+    console.log('----->   ' +this.itemID);
 
     //set token to http header
     this.headers = new HttpHeaders()
@@ -45,6 +46,7 @@ export class ProductDetailComponent implements OnInit {
     warehouse: '',
     description: ''
   }
+  productNotFound = false;
 
   // redirect user to home page
   redirectHome(): void{
@@ -79,6 +81,11 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProductItem(data, this.headers)
       .subscribe(
         data => {
+
+          //check product is available or not
+          if(data == null){
+            this.productNotFound = true;
+          }
           for (let index = 0; index < this.warehouseList.length; index++) {
             if (data.warehouse == this.warehouseList[index]["id"]) {
               this.productList.warehouse = this.warehouseList[index]["name"];
@@ -91,7 +98,8 @@ export class ProductDetailComponent implements OnInit {
           this.imageUrl = this.productService.getImageLink(data.image_path);
         },
         error => {
-          console.log(error);
+          //If the product is not found
+          this.productNotFound = true;
         }
       )
   }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //To Change API Service Domain Name
+// Please , don't add '/' at the end of the url
 const baseUrl = 'http://localhost:5000';
 
 @Injectable({

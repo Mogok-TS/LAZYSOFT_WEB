@@ -1,4 +1,4 @@
-<div class="col-12 pageview">
+<div class="col-12 pageview" *ngIf = "!productNotFound">
     <div class="tabs">
         <small class="redirect-btn" (click)="redirectHome()">Home</small>
         &nbsp;&nbsp;&nbsp;
@@ -45,3 +45,11 @@
     </div>
 </div>
 
+<div *ngIf = "productNotFound" class = "notFound col-12">
+    <div>
+        <i class="fas fa-exclamation-triangle"></i>Error 404!
+    </div>
+    <div>
+        Product Not Found!
+    </div>
+</div>
